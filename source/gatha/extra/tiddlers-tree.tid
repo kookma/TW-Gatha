@@ -1,10 +1,10 @@
 created: 20220203060016202
-modified: 20220203153109388
+modified: 20220203161925889
 tags: 
 title: $:/plugins/kookma/gatha/extra/tiddlers-tree
 type: text/vnd.tiddlywiki
 
-\define tempTid() xx$:/temp/$(currentTiddler)$
+\define tempTid() $:/temp/$(currentTiddler)$
 <div style="margin-bottom:8px">
 <$vars extratiddlerNumber= {{{ [enlist{!!extra-tiddlers}count[]] }}}>
 Extra tiddlers (<$text text=<<extratiddlerNumber>> />)&nbsp;
