@@ -1,0 +1,14 @@
+created: 20220201130111954
+modified: 20220201130456686
+tags: 
+title: $:/plugins/kookma/gatha/templates/boilerplate/readme
+type: text/vnd.tiddlywiki
+
+; Shiraz[use correct name]
+describe what is the plugin in one paragraph
+
+;Code and demo
+For learning plugin features, syntax, tutorial and examples see the plugin demo and code pages
+
+* Demo: https://kookma.github.io/TW-???/
+* Code: https://github.com/kookma/TW-???

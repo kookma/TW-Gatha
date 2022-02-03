@@ -1,0 +1,28 @@
+created: 20190328122950761
+modified: 20220201134129105
+title: $:/plugins/kookma/gatha/macros/create-item
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define create-item(btnCaption:"new item", type, tidTitle, template, fields)
+<$set name="newTitle" 
+   filter="[<__type__>!is[blank]]" 
+   value={{{[<plugin-full-path>addsuffix[/$type$]addsuffix[/$tidTitle$]]}}} 
+   emptyValue={{{[<plugin-full-path>addsuffix[/$tidTitle$]]}}} 
+>
+<$button class=<<tv-config-toolbar-class>> > $btnCaption$
+<$macrocall $name=unique-title baseTitle=<<newTitle>> template=<<__template__>> fields=<<__fields__>> />
+</$button>
+</$set>
+\end
+
+\define unique-title(baseTitle:"New Tiddler", template, fields:"" n:0)
+<$set name="inc" value={{{ [<__n__>add[1]addprefix[0000]split[]last[3]join[]] }}}>
+<$set name="newTitle" value={{{[<__baseTitle__>addsuffix<inc>]}}}>
+<$list filter="[<newTitle>] +[!has[title]]" 
+emptyMessage=""" <$macrocall $name="unique-title" baseTitle=<<__baseTitle__>> template=<<__template__>> fields=<<__fields__>> n=<<inc>> /> """>
+<$action-sendmessage $message="tm-new-tiddler" $param=<<__template__>> title=<<newTitle>> $fields$/>
+</$list>
+</$set>
+\end

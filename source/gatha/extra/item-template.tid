@@ -1,0 +1,8 @@
+created: 20220203065336586
+hide-body: yes
+modified: 20220203075703692
+tags: show-content
+title: $:/plugins/kookma/gatha/extra/item-template
+type: text/vnd.tiddlywiki
+
+<span>{{$:/core/images/file}}</span> <$link/>

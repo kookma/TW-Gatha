@@ -1,0 +1,11 @@
+created: 20220203102732584
+hide-body: yes
+modified: 20220203123744833
+tags: show-content
+title: $:/plugins/kookma/gatha/extra/remove-template
+type: text/vnd.tiddlywiki
+
+\define remove-action()
+<$action-listops $tiddler=<<plugin-full-path>> $field="extra-tiddlers" $subfilter="-[[$(currentTiddler)$]]"/>
+\end
+<$button class="tc-btn-invisible ga-btn-remove" actions=<<remove-action>> >{{$:/core/images/close-button}}</$button> <$link/>

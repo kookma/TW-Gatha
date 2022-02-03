@@ -1,0 +1,14 @@
+created: 20190329084757283
+modified: 20220203123001647
+tags: 
+title: $:/plugins/kookma/gatha/macros/create-plugin
+type: text/vnd.tiddlywiki
+
+\define create-new-plugin()
+<div class="tc-timeline">
+  <div class="tc-menu-list-item tc-sidebar-header">
+    <$button tooltip="create new plugin" class=<<tv-config-toolbar-class>> >{{$:/core/images/new-button}}
+      <$action-sendmessage $message="tm-new-tiddler" title="$:/plugins/PublisherName/PluginName" plugin-draft="plugin" type="application/json"/>
+    </$button><span class="tc-btn-text">new plugin</span>
+  </div>
+\end

@@ -1,0 +1,20 @@
+\define plugin-tiddler-within(title) $:/plugins/$(plugin-name)$/$title$
+\define plugin-title() $:/plugins/$(plugin-name)$
+
+<$button class=<<tv-config-toolbar-class>> >
+<<plugin-boilerplate-icon>>{{!!caption}}
+
+<$tiddler tiddler=<<plugin-tiddler-within "plugin.info">> >
+<$action-setfield $index="title" $value=<<plugin-title>>    />
+<$action-setfield $index="name"  $value={{{ [<plugin-title>get[name]] }}}   />
+<$action-setfield $index="description" $value={{{ [<plugin-title>get[description]] }}}    />
+<$action-setfield $index="author" $value={{{ [<plugin-title>get[author]] }}}    />
+<$action-setfield $index="version" $value={{{[<plugin-title>get[version]]}}}    />
+<$action-setfield $index="core-version" $value={{{[<plugin-title>get[core-version]] ~[<version>]}}}    />
+<$action-setfield $index="source" $value={{{[<plugin-title>get[source]]}}}    />
+<$action-setfield $index="list" $value={{{[<plugin-title>get[list]]}}}    />
+<$action-setfield $index="plugin-type" $value={{{[<plugin-title>get[plugin-type]]}}}    />
+<$action-setfield $index="dependents" $value={{{[<plugin-title>get[dependents]]}}}    />
+<$action-navigate $to=<<currentTiddler>>/>
+</$tiddler>
+</$button>

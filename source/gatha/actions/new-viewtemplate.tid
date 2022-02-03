@@ -1,0 +1,16 @@
+caption: new view template
+created: 20190326200941455
+modified: 20220203084708887
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/new-viewtemplate
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-item
+
+<$macrocall $name=create-item
+  btnCaption={{!!caption}}
+  type="viewtemplates"
+  tidTitle="vtm"
+  template="$:/plugins/kookma/gatha/templates/viewtemplate"
+  fields="tags='$:/tags/ViewTemplate'"
+/>

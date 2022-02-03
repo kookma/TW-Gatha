@@ -1,0 +1,6 @@
+created: 20141025155725392
+modified: 20201210101408285
+title: $:/plugins/kookma/gatha/plugin-types/undefined
+type: text/vnd.tiddlywiki
+
+<code><$view field="plugin-type"/></code> -- is an ''unknown plugin type''.

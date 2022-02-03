@@ -1,0 +1,65 @@
+created: 20220201123140487
+modified: 20220203124100617
+tags: 
+title: $:/plugins/kookma/gatha/tabs/content-template
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define plugin-exported-filename() $(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.json
+\define plugin-full-path() $:/plugins/$(publisherName)$/$(pluginName)$
+
+\define disp-plugin-tree(plugin-name, publisher)
+<!-- plugin actions -->
+<$set name="qp" value={{{[<plugin-full-path>prefix[$:/state/popup/]]>}}} >
+<$button popup=<<qp>> class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+{{$:/core/images/down-arrow}}
+</$button>
+<$reveal state=<<qp>> type="popup" position="below" animate="yes">
+<div class="tc-drop-down">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/gatha/action]!has[draft.of]sort[caption]]">
+<$transclude mode="inline"/>
+</$list>
+</div>
+</$reveal>
+</$set>
+<!-- plugin author/name w. link -->
+<$link to=<<plugin-full-path>> />
+&nbsp;(<$count filter="[prefix<plugin-full-path>] -[<plugin-full-path>]" />)
+
+<!-- list of plugin contents -->
+<div class="tc-tree" style="padding:5px;padding-left:12px;">
+  <$macrocall $name="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
+</div>
+\end
+
+
+<$tiddler tiddler=<<currentTab>>>
+<$vars 
+ pluginName    = {{{ [<currentTiddler>removeprefix[$:/plugins/]split[/]last[1]]  }}}
+ publisherName = {{{ [<currentTiddler>removeprefix[$:/plugins/]split[/]first[1]] }}}
+ pluginVersion = {{{ [<currentTiddler>get[version]else[0.0.0]] }}}
+ timedate      = <<now "YYYY0MM0DD">>
+> 
+
+<!--- export button --->
+<div style="margin-bottom:10px;">
+<$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
+<$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
+<$button class="ga-btn-export" >{{$:/core/images/export-button}}<span class="tc-btn-text">export plugin</span>
+<$action-sendmessage $message="tm-download-file" 
+    $param="$:/plugins/kookma/gatha/export/jsonfile" 
+    exportFilter=<<exportFilter>> 
+    pluginTiddler=<<plugin-full-path>>
+    filename=<<plugin-exported-filename>>
+/>
+</$button>
+</$wikify>
+</$set>
+</div>
+
+<!--- create the tab content for one plugin-draft --->
+<$macrocall $name=disp-plugin-tree plugin-name=<<pluginName>> publisher=<<publisherName>> />
+<!-- extra plugin tiddlers section -->
+{{||$:/plugins/kookma/gatha/extra/tiddlers-tree}}
+</$vars>
+</$tiddler>

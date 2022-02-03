@@ -1,0 +1,20 @@
+created: 20220202052403295
+modified: 20220203070329938
+tags: 
+title: $:/plugins/kookma/gatha/export/jsonfile
+type: text/vnd.tiddlywiki
+
+\define plugin-shadow-tiddlers()
+{"tiddlers": {<$list filter="[subfilter<exportFilter>]+[bl[]]">
+"{{{ [<currentTiddler>] +[jsonstringify[]] }}}": <$text text=<<jsontiddler>>/>,
+</$list><$list filter="[subfilter<exportFilter>]+[last[]]">
+"{{{ [<currentTiddler>] +[jsonstringify[]] }}}": <$text text=<<jsontiddler>>/></$list>}
+}
+\end
+
+<$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
+<$jsontiddler tiddler=<<pluginTiddler>> 
+ $plugin-type="plugin"
+ $text=<<pluginShadows>>
+ escapeUnsafeScriptChars="yes" />
+</$wikify>

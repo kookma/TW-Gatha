@@ -1,0 +1,23 @@
+caption: add boilerplate tiddlers
+created: 20190325083646838
+list: readme license history
+modified: 20220203085009480
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/add-boilerplate
+type: text/vnd.tiddlywiki
+
+\define plugin-tiddler-within(title) $:/plugins/$(__publisher__)$/$(__plugin-name__)$/$title$
+
+<$set name="old-list" tiddler=<<plugin-full-path>> field="list">
+<$set name="list" filter="[enlist<old-list>] -[[readme]] -[[license]] -[[history]]">
+<$set name="new-list" filter="readme license history [enlist<list>]">
+<$button class=<<tv-config-toolbar-class>> >
+<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "history">> $param="$:/plugins/kookma/gatha/templates/boilerplate/history" />
+<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "license">> $param="$:/plugins/kookma/gatha/templates/boilerplate/license" />
+<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "readme">> $param="$:/plugins/kookma/gatha/templates/boilerplate/readme" />
+<$action-setfield $tiddler=<<plugin-full-path>> list=<<new-list>> />
+<<plugin-boilerplate-icon>>{{!!caption}}
+</$button>
+</$set>
+</$set>
+</$set>

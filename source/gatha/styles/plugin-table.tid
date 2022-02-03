@@ -1,0 +1,49 @@
+created: 20220203030437428
+modified: 20220203034739988
+tags: $:/tags/Stylesheet
+title: $:/plugins/kookma/gatha/styles/plugin-table
+type: text/vnd.tiddlywiki
+
+/* by Mohammad */
+.ga-plugin-info{
+  width:100%;
+}
+.ga-plugin-edit-element-value input{
+ width:100%;
+}
+/*---------------------*/
+
+tr.ga-plugin-info-element td {
+  padding-top: 0.4ex;
+  padding-bottom: 0.4ex;
+  vertical-align: baseline;
+}
+
+td.ga-plugin-info-element-name {
+  text-align: right;
+  vertical-align: baseline;
+	white-space: nowrap;
+  background-color: <<colour table-header-background>>;
+  font-weight: bold;
+}
+
+td.ga-plugin-info-element-value {
+  text-align: left;
+  vertical-align: top;
+}
+
+span.ga-plugin-info-unspecified {
+  font-style: italic;
+  color: <<colour very-muted-foreground>>;
+}
+
+span.ga-plugin-info-unspecified:before {
+  font-style: normal;
+  content: "(";
+}
+
+span.ga-plugin-info-unspecified:after {
+  font-style: normal;
+  content: ")";
+  padding-left: 0.15em;
+}

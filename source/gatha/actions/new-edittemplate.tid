@@ -1,0 +1,16 @@
+caption: new edit template
+created: 20220201133156251
+modified: 20220203084627730
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/new-edittemplate
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-item
+
+<$macrocall $name=create-item
+  btnCaption={{!!caption}}
+  type="edittemplates"
+  tidTitle="etm"
+  template="$:/plugins/kookma/gatha/templates/edittemplate"
+  fields="tags='$:/tags/EditTemplate'"
+/>

@@ -1,0 +1,16 @@
+caption: new cascade style (css)
+created: 20190325083208620
+modified: 20220203084654652
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/new-stylesheet
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-item
+
+<$macrocall $name=create-item
+  btnCaption={{!!caption}}
+  type="styles"
+  tidTitle="css"
+  template="$:/plugins/kookma/gatha/templates/style"
+  fields="tags='$:/tags/Stylesheet'"
+/>

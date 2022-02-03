@@ -1,0 +1,54 @@
+created: 20220201135853103
+list-before: $:/core/ui/EditTemplate/body
+modified: 20220203030335601
+tags: 
+title: $:/plugins/kookma/gatha/ui/edit-template-plugin-meta-data
+type: text/vnd.tiddlywiki
+
+\define plugin-info-row(name, value, output:"html")
+\rules except wikilink
+  <tr class="ga-plugin-info-element">
+    <td class="ga-plugin-info-element-name">
+      $name$:
+    </td>
+    <td class="ga-plugin-edit-element-value">
+	  $value$
+    </td>
+  </tr>
+\end
+
+\define plugin-edit-row(name, field, placeholder)
+  <tr class="ga-plugin-info-element">
+    <td class="ga-plugin-info-element-name">
+      $name$:
+    </td>
+    <td class="ga-plugin-edit-element-value">
+      <$edit-text field="$field$" placeholder="$placeholder$"/>
+    </td>
+  </tr>
+\end
+
+<$list filter="[all[current]has:field[plugin-draft]]">
+
+<div class="ga-plugin-info">
+  <table class="ga-plugin-info">
+    <$set name="publisher" filter="[all[current]get[draft.title]removeprefix[$:/plugins/]splitbefore[/]removesuffix[/]]">
+      <<plugin-info-row name:"Plugin publisher" value:"$(publisher)$" output:"text">>
+      <$set name="plugin-name" filter="[all[current]get[draft.title]removeprefix[$:/plugins/]removeprefix<publisher>removeprefix[/]splitbefore[/]]">
+        <<plugin-info-row name:"Plugin name" value:"$(plugin-name)$" output:"text">>
+      </$set>
+    </$set>
+
+	<<plugin-edit-row "Version" "version" "0.0.1">>
+	<<plugin-edit-row "Plugin type" "plugin-draft" "plugin">>
+	<<plugin-edit-row "Display name" "name" "The name displayed in plugins page">>
+	<<plugin-edit-row "Description" "description" "Tell TiddlyWiki users about what your plugin does">>
+	<<plugin-edit-row "Author" "author" "U. K. Known">>
+	<<plugin-edit-row "Source" "source" "https://example.org/foo">>
+	<<plugin-edit-row "Plugin priority" "plugin-priority" "">>
+	<<plugin-edit-row "Plugin dependencies" "dependents" "Plugins that should be installed in order for this one to work">>	
+	<<plugin-edit-row "Required TW Core version" "core-version" ">=5.1.23">>
+</table>
+</div>
+
+</$list>

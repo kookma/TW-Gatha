@@ -1,0 +1,109 @@
+created: 20220201135412536
+list-before: $:/core/ui/ViewTemplate/plugin
+modified: 20220203053515711
+tags: 
+title: $:/plugins/kookma/gatha/ui/view-template-plugin-meta-data
+type: text/vnd.tiddlywiki
+
+\define plugin-type-infotiddler(tiddler)
+  <$transclude tiddler="$tiddler$">
+    <$transclude tiddler="$:/plugins/kookma/gatha/plugin-types/undefined"/>
+  </$transclude>
+\end
+
+\define plugin-type-info(type)
+  <$macrocall $name="plugin-type-infotiddler" tiddler="$:/plugins/kookma/gatha/plugin-types/$type$"/>
+\end
+
+\define plugin-info-row(name, value)
+\rules except wikilink
+  <tr class="ga-plugin-info-element">
+    <td class="ga-plugin-info-element-name">
+      $name$:
+    </td>
+    <td class="ga-plugin-info-element-value">
+      $value$
+    </td>
+  </tr>
+\end
+
+\define plugin-info-field-unspecified()
+  <span class='ga-plugin-info-unspecified'>unspecified</span>
+\end
+
+\define plugin-info-field(name, field)
+  <<plugin-info-row "$name$" "<$view field='$field$' format='text'><$macrocall $name='plugin-info-field-unspecified' /></$view>">>
+\end
+
+\define plugin-info-field-plugin-type-int(name, type)
+  <$set name="desc" value=<<plugin-type-info "$type$" >> >
+    <$macrocall $name="plugin-info-row" name="$name$" value=<<desc>> />
+  </$set>
+\end
+
+\define plugin-info-field-plugin-type(name)
+  <$macrocall $name="plugin-info-field-plugin-type-int" name="$name$" type={{!!plugin-draft}} />
+\end
+
+\define plugin-info-field-link(name, field)
+  <$list filter="[all[current]!field:$field$[]]" emptyMessage="""<<plugin-info-row "$name$" "<$macrocall $name='plugin-info-field-unspecified'/>" >>""">
+    <$macrocall $name="plugin-info-row" name="$name$" value={{!!$field$}} />
+  </$list>
+\end
+
+\define plugin-info-filter(name, filter)
+  <$list filter="$filter$" emptyMessage="""<<plugin-info-row "$name$" "<$macrocall $name='plugin-info-field-unspecified'/>" >>""">
+    <$macrocall $name="plugin-info-row" name="$name$" value={{!!title}} />
+  </$list>
+\end
+
+\define update-plugin-info(name)
+  <tr class="ga-plugin-info-element">
+    <td class="ga-plugin-info-element-name">
+      $name$:
+    </td>
+    <td class="ga-plugin-info-element-value">
+      <$vars infoTid={{{ [<currentTiddler>addsuffix[/plugin.info]] }}}
+        pluginTid=<<currentTiddler>> >
+        <$button class="tc-btn-invisible tc-tiddlylink" tooltip="create and update plugin.info"> update
+          <$action-setfield $tiddler=<<infoTid>> $index="title"    $value=<<pluginTid>> />
+          <$list filter="name description author version core-version source list dependents" variable=idx>
+            <$action-setfield $tiddler=<<infoTid>>  $index=<<idx>>    $value={{{[<pluginTid>get<idx>] }}}/>
+          </$list>
+					<$action-setfield $tiddler=<<infoTid>>  $index="plugin-type"    $value={{{[<pluginTid>get[plugin-draft]] }}}/>
+        </$button>
+      </$vars>
+    </td>
+  </tr>
+\end
+
+
+<$list filter="[all[current]has:field[plugin-draft]]">
+
+<div class="ga-plugin-info">
+  <table class="ga-plugin-info">
+    <$list filter="[all[current]removeprefix[$:/plugins/]]">
+    	<<plugin-info-filter "Plugin publisher" "[all[current]split[/]first[1]]">>
+    	<<plugin-info-filter "Plugin name" "[all[current]split[/]last[1]]">>
+    </$list>
+    <$list filter="[all[current]removeprefix[$:/themes/]]">
+    	<<plugin-info-filter "Theme publisher" "[all[current]split[/]first[1]]">>
+    	<<plugin-info-filter "Theme name" "[all[current]split[/]last[1]]">>
+    </$list>
+    <$list filter="[all[current]prefix[$:/core]]">
+    	<<plugin-info-row "Plugin publisher" "TiddlyWiki">>
+      <<plugin-info-row "Plugin name" "core">>
+    </$list>
+    <<plugin-info-field "Version" "version">>
+    <$macrocall $name="plugin-info-field-plugin-type" name="Plugin type" />
+    <<plugin-info-field "Display name" "name">>
+    <<plugin-info-field "Description" "description">>
+    <<plugin-info-field "Author" "author">>
+    <$macrocall $name="plugin-info-field-link" name="Source" field="source" />
+    <<plugin-info-field "Plugin priority" "plugin-priority">>
+    <<plugin-info-field "Plugin dependencies" "dependents">>	
+    <<plugin-info-field "Required TW Core version" "core-version">>
+    <<update-plugin-info "Plugin.info">>
+  </table>
+</div>
+</$list>

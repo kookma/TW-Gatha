@@ -1,0 +1,6 @@
+created: 20141025180244406
+modified: 20201210101408211
+title: $:/plugins/kookma/gatha/plugin-types/language
+type: text/vnd.tiddlywiki
+
+`language` -- this plugin is a language package for the language "{{!!name}}". This language plugin will automatically be used when you select this language in the [[basic settings|$:/core/ui/ControlPanel/Basics]] of the [[control panel|$:/ControlPanel]].

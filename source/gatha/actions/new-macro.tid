@@ -1,0 +1,15 @@
+caption: new macro
+created: 20190325083151771
+modified: 20220203084633080
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/new-macro
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-item
+<$macrocall $name=create-item
+  btnCaption={{!!caption}}
+  type="macros"
+  tidTitle="mac"
+  template="$:/plugins/kookma/gatha/templates/macro"
+  fields="tags='$:/tags/Macro'"
+/>

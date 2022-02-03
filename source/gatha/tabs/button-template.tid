@@ -1,0 +1,9 @@
+created: 20220201111641839
+modified: 20220201125359121
+tags: 
+title: $:/plugins/kookma/gatha/tabs/button-template
+type: text/vnd.tiddlywiki
+
+<$tiddler tiddler=<<currentTab>>>
+<$text text={{{ [<currentTiddler>split[/]last[]] }}}/>
+</$tiddler>

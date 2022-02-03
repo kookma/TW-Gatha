@@ -1,0 +1,10 @@
+.tc-tree .ga-btn-remove svg {
+	font-size:0.7em;
+}
+
+.ga-btn-export svg,
+.ga-btn-edit svg {
+	vertical-align: baseline;
+	font-size:0.9em;
+}
+

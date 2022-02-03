@@ -1,0 +1,8 @@
+created: 20141025174630240
+modified: 20220203033609086
+title: $:/plugins/kookma/gatha/plugin-types/theme
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+`theme` -- contains a TiddlyWiki 5 theme.
+You can select this theme through the [[theme switcher|$:/core/ui/ControlPanel/Theme]] in the [[control pane|$:/ControlPanel]].

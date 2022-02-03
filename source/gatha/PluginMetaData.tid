@@ -1,0 +1,8 @@
+created: 20220201054343503
+list-before: $:/config/ViewTemplateBodyFilters/system
+modified: 20220203155424881
+tags: $:/tags/ViewTemplateBodyFilter
+title: $:/config/gatha/ViewTemplateBodyFilters/PluginMetaData
+type: text/vnd.tiddlywiki
+
+[has[plugin-draft]then[$:/plugins/kookma/gatha/ui/view-template-plugin-meta-data]]

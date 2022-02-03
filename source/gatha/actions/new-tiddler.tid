@@ -1,0 +1,15 @@
+caption: new tiddler
+created: 20190325083111809
+modified: 20220203084700959
+tags: $:/tags/gatha/action
+title: $:/plugins/kookma/gatha/actions/new-tiddler
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-item
+
+<$macrocall $name=create-item
+  btnCaption={{!!caption}}
+  tidTitle="tid"
+  template="$:/plugins/kookma/gatha/templates/tiddler"
+  fields=""
+/>
