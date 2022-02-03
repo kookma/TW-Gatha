@@ -1,5 +1,5 @@
 created: 20220201123140487
-modified: 20220203124100617
+modified: 20220203212433278
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
@@ -31,7 +31,6 @@ type: text/vnd.tiddlywiki
   <$macrocall $name="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
 </div>
 \end
-
 
 <$tiddler tiddler=<<currentTab>>>
 <$vars 

@@ -1,19 +1,22 @@
 caption: Gatha
 created: 20220201102742703
-modified: 20220202205134998
+modified: 20220203212409617
 tags: $:/tags/SideBar
 title: $:/plugins/kookma/gatha/ui/sidebar
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/macros/create-plugin
 
+<div class="ga-sidebar">
+
 <<create-new-plugin>>
 
 <!-- creats tabs from plugin drafts -->
-<$macrocall $name=tabs
+<$macrocall $name="tabs"
  tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]]" 
  default=   {{{ [all[tiddlers]has:field[plugin-draft]first[]] }}}
  buttonTemplate="$:/plugins/kookma/gatha/tabs/button-template"
  template="$:/plugins/kookma/gatha/tabs/content-template"
- class=tc-vertical
+ class="tc-vertical"
  />
+ </div>

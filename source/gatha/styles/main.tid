@@ -1,0 +1,20 @@
+created: 20220203025826558
+modified: 20220203212257562
+tags: $:/tags/Stylesheet
+title: $:/plugins/kookma/gatha/styles/main
+type: text/vnd.tiddlywiki
+
+.tc-tree .ga-btn-remove svg {
+	font-size:0.7em;
+}
+
+.ga-btn-export svg,
+.ga-btn-edit svg {
+	vertical-align: baseline;
+	font-size:0.9em;
+}
+
+/* correct svg color in sidebar */
+.ga-sidebar button svg {
+   fill: <<colour sidebar-controls-foreground>>;
+}
