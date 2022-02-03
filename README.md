@@ -12,7 +12,7 @@ Create Tiddlywiki plugins in browser. Supports both single file Tiddlywiki and N
 For dtails on how install Indexer plugin in your wiki, have a look at https://kookma.github.io/TW-Gatha/#Install
 
 
-## Ethympology
+## Etymology
 The Gathas (/ˈɡɑːtəz, -tɑːz/)[1] are 17 Avestan hymns traditionally believed to have been composed by the Persian (Iranian) prophet Zarathushtra (Zoroaster).
 They form the core of the Zoroastrian liturgy (the Yasna). They are arranged in five different modes or metres.
 
