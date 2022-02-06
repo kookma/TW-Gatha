@@ -1,6 +1,6 @@
 created: 20220201135853103
 list-before: $:/core/ui/EditTemplate/body
-modified: 20220203030335601
+modified: 20220206193955475
 tags: 
 title: $:/plugins/kookma/gatha/ui/edit-template-plugin-meta-data
 type: text/vnd.tiddlywiki
@@ -28,19 +28,45 @@ type: text/vnd.tiddlywiki
   </tr>
 \end
 
+<!-- select plugin-type and update the draft title
+The update-draft-title-action used by select widget to update title of draft plugin
+-->
+\define update-draft-title-action() 
+<$vars old-draft-title={{{ [all[current]get[draft.title]split[/]butfirst[2]] +[join[/]] }}} >
+<$action-setfield $field="draft.title" $value={{{ [{!!plugin-draft}addprefix[$:/]addsuffix[s/]addsuffix<old-draft-title>]  }}} />
+</$vars>
+\end
+
+\define plugin-edit-row-plugintype(name, field, placeholder)
+<tr class="ga-plugin-info-element">
+  <td class="ga-plugin-info-element-name">
+    $name$:
+  </td>
+  <td class="ga-plugin-edit-element-value">
+	<$edit-text field="$field$" placeholder="$placeholder$" class="ga-plugin-edit-element-type"/>&nbsp; <$select field="$field$" default="plugin" actions=<<update-draft-title-action>> >
+            <$list filter="[all[tiddlers+shadows]tag[$:/tags/Gatha/PluginType]] :filter[has[caption]get[caption]!match[Undefined]]">
+                <option value={{{ [{!!caption}lowercase[]] }}} ><$text text={{!!caption}}/></option>
+            </$list>
+        </$select>
+    </td>
+</tr>       
+\end        
+
+
+<!-- create the table -->
 <$list filter="[all[current]has:field[plugin-draft]]">
 
 <div class="ga-plugin-info">
   <table class="ga-plugin-info">
-    <$set name="publisher" filter="[all[current]get[draft.title]removeprefix[$:/plugins/]splitbefore[/]removesuffix[/]]">
+    <$set name="publisher" filter="[all[current]get[draft.title]split[/]nth[3]]">
       <<plugin-info-row name:"Plugin publisher" value:"$(publisher)$" output:"text">>
-      <$set name="plugin-name" filter="[all[current]get[draft.title]removeprefix[$:/plugins/]removeprefix<publisher>removeprefix[/]splitbefore[/]]">
+      <$set name="plugin-name" filter="[all[current]get[draft.title]split[/]nth[4]]">
         <<plugin-info-row name:"Plugin name" value:"$(plugin-name)$" output:"text">>
       </$set>
     </$set>
 
 	<<plugin-edit-row "Version" "version" "0.0.1">>
-	<<plugin-edit-row "Plugin type" "plugin-draft" "plugin">>
+	<<plugin-edit-row-plugintype "Plugin type" "plugin-draft" "plugin">>
 	<<plugin-edit-row "Display name" "name" "The name displayed in plugins page">>
 	<<plugin-edit-row "Description" "description" "Tell TiddlyWiki users about what your plugin does">>
 	<<plugin-edit-row "Author" "author" "U. K. Known">>

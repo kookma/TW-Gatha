@@ -1,5 +1,5 @@
 created: 20220202052403295
-modified: 20220203070329938
+modified: 20220204175200034
 tags: 
 title: $:/plugins/kookma/gatha/export/jsonfile
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 <$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
 <$jsontiddler tiddler=<<pluginTiddler>> 
- $plugin-type="plugin"
+ $plugin-type=<<pluginType>>
  $text=<<pluginShadows>>
  escapeUnsafeScriptChars="yes" />
 </$wikify>

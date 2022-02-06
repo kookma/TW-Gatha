@@ -1,6 +1,8 @@
+caption: Undefined
 created: 20141025155725392
-modified: 20201210101408285
+modified: 20220204090541920
+tags: $:/tags/Gatha/PluginType
 title: $:/plugins/kookma/gatha/plugin-types/undefined
 type: text/vnd.tiddlywiki
 
-<code><$view field="plugin-type"/></code> -- is an ''unknown plugin type''.
+<code><$view field="plugin-draft"/></code> -- is an ''unknown plugin type''.

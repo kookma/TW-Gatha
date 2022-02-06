@@ -1,6 +1,6 @@
 created: 20220201135412536
 list-before: $:/core/ui/ViewTemplate/plugin
-modified: 20220203053515711
+modified: 20220204084030248
 tags: 
 title: $:/plugins/kookma/gatha/ui/view-template-plugin-meta-data
 type: text/vnd.tiddlywiki
@@ -79,6 +79,8 @@ type: text/vnd.tiddlywiki
 
 
 <$list filter="[all[current]has:field[plugin-draft]]">
+
+{{||$:/core/ui/Components/plugin-info}}
 
 <div class="ga-plugin-info">
   <table class="ga-plugin-info">

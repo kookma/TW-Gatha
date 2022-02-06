@@ -1,12 +1,12 @@
 caption: add boilerplate tiddlers
 created: 20190325083646838
 list: readme license history
-modified: 20220203085009480
-tags: $:/tags/gatha/action
+modified: 20220204172418105
+tags: $:/tags/Gatha/Action
 title: $:/plugins/kookma/gatha/actions/add-boilerplate
 type: text/vnd.tiddlywiki
 
-\define plugin-tiddler-within(title) $:/plugins/$(__publisher__)$/$(__plugin-name__)$/$title$
+\define plugin-tiddler-within(title) $(namePrefix)$$(__publisher__)$/$(__plugin-name__)$/$title$
 
 <$set name="old-list" tiddler=<<plugin-full-path>> field="list">
 <$set name="list" filter="[enlist<old-list>] -[[readme]] -[[license]] -[[history]]">

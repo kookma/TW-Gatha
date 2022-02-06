@@ -1,8 +1,0 @@
-created: 20220203033918767
-modified: 20220203034345629
-tags: 
-title: $:/plugins/kookma/gatha/plugin-types/media
-type: text/vnd.tiddlywiki
-
-\rules except wikilink
-`media` -- this is a custom form of a TiddlyWiki 5 plugin to distribute contents like ebooks, slides, messages, audios, notes.

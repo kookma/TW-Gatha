@@ -1,49 +1,59 @@
 created: 20220203030437428
-modified: 20220203034739988
+modified: 20220204111405147
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/plugin-table
 type: text/vnd.tiddlywiki
 
-/* by Mohammad */
+/* Newly added  */
 .ga-plugin-info{
-  width:100%;
+	width:100%;
 }
 .ga-plugin-edit-element-value input{
- width:100%;
+	width:100%;
 }
-/*---------------------*/
+td.ga-plugin-info-element-name{
+	width:14rem;
+}
+/* the plugin-type input */
+.ga-plugin-edit-element-value input[type=text].ga-plugin-edit-element-type {width:70%;}
+.ga-plugin-edit-element-value select {
+	width: calc(30% - 8px);
+	border-width:2px;
+}
+
+/*---from tfc---*/
 
 tr.ga-plugin-info-element td {
-  padding-top: 0.4ex;
-  padding-bottom: 0.4ex;
-  vertical-align: baseline;
+	padding-top: 0.4ex;
+	padding-bottom: 0.4ex;
+	vertical-align: baseline;
 }
 
 td.ga-plugin-info-element-name {
-  text-align: right;
-  vertical-align: baseline;
+	text-align: right;
+	vertical-align: baseline;
 	white-space: nowrap;
-  background-color: <<colour table-header-background>>;
-  font-weight: bold;
+	background-color: <<colour table-header-background>>;
+	font-weight: bold;
 }
 
 td.ga-plugin-info-element-value {
-  text-align: left;
-  vertical-align: top;
+	text-align: left;
+	vertical-align: top;
 }
 
 span.ga-plugin-info-unspecified {
-  font-style: italic;
-  color: <<colour very-muted-foreground>>;
+	font-style: italic;
+	color: <<colour very-muted-foreground>>;
 }
 
 span.ga-plugin-info-unspecified:before {
-  font-style: normal;
-  content: "(";
+	font-style: normal;
+	content: "(";
 }
 
 span.ga-plugin-info-unspecified:after {
-  font-style: normal;
-  content: ")";
-  padding-left: 0.15em;
+	font-style: normal;
+	content: ")";
+	padding-left: 0.15em;
 }

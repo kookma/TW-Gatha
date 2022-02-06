@@ -1,20 +1,55 @@
 created: 20220203025826558
-modified: 20220203212257562
+modified: 20220206173620620
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
 
-.tc-tree .ga-btn-remove svg {
-	font-size:0.7em;
+/* remove button in extra tiddler list */
+.ga-btn-remove{
+	width:  1em;
+	height: 1em;
 }
 
+.tc-tree .ga-btn-remove svg {
+	font-size:0.75em;
+	vertical-align: baseline;
+}
+
+/*--------------- export and edit button */
+.ga-btn-export {
+/* cursor: pointer;*/
+}
 .ga-btn-export svg,
 .ga-btn-edit svg {
 	vertical-align: baseline;
-	font-size:0.9em;
+	font-size:0.95em;
 }
 
-/* correct svg color in sidebar */
+
+/*--------------- correct button svg color in sidebar */
 .ga-sidebar button svg {
-   fill: <<colour sidebar-controls-foreground>>;
+	fill: <<colour sidebar-tiddler-link-foreground>>;
+}
+.ga-sidebar button:hover svg {
+	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+.ga-sidebar button.tc-btn-invisible {
+	color: <<colour sidebar-tiddler-link-foreground>>;
+}
+.ga-sidebar button.tc-btn-invisible:hover {
+	color: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+/*--------------- tc-tree for tree macro*/
+.ga-sidebar .tc-tree button {
+	color:<<colour sidebar-tiddler-link-foreground>>;
+	font-weight:500;
+}
+.ga-sidebar .tc-tree li:hover svg{
+	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+.ga-sidebar .tc-tree li span{
+	color:<<colour sidebar-tiddler-link-foreground>>; 
 }
