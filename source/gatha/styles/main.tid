@@ -1,5 +1,5 @@
 created: 20220203025826558
-modified: 20220206173620620
+modified: 20220207071439089
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
@@ -25,6 +25,18 @@ type: text/vnd.tiddlywiki
 	font-size:0.95em;
 }
 
+/****** the sidebar create new-plugin NEEDs FIX
+.ga-sidebar .ga-btn-createplugin {
+ vertical-align: middle;
+ color: <<colour background>>; 
+ font-size:0.75em; 
+ }
+
+.ga-sidebar .ga-btn-createplugin:hover {
+    background: <<colour background>>;
+    color: <<colour muted-foreground>>;
+}		
+******/
 
 /*--------------- correct button svg color in sidebar */
 .ga-sidebar button svg {
