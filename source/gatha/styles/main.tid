@@ -1,5 +1,5 @@
 created: 20220203025826558
-modified: 20220207071439089
+modified: 20220207173158051
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
@@ -15,37 +15,14 @@ type: text/vnd.tiddlywiki
 	vertical-align: baseline;
 }
 
-/*--------------- export and edit button */
-.ga-btn-export {
-/* cursor: pointer;*/
-}
-.ga-btn-export svg,
-.ga-btn-edit svg {
-	vertical-align: baseline;
-	font-size:0.95em;
-}
-
-/****** the sidebar create new-plugin NEEDs FIX
-.ga-sidebar .ga-btn-createplugin {
- vertical-align: middle;
- color: <<colour background>>; 
- font-size:0.75em; 
- }
-
-.ga-sidebar .ga-btn-createplugin:hover {
-    background: <<colour background>>;
-    color: <<colour muted-foreground>>;
-}		
-******/
 
 /*--------------- correct button svg color in sidebar */
-.ga-sidebar button svg {
+ .ga-sidebar button svg {
 	fill: <<colour sidebar-tiddler-link-foreground>>;
 }
 .ga-sidebar button:hover svg {
 	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
-
 .ga-sidebar button.tc-btn-invisible {
 	color: <<colour sidebar-tiddler-link-foreground>>;
 }

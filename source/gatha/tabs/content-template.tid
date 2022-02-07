@@ -1,5 +1,6 @@
 created: 20220201123140487
-modified: 20220206173223193
+hide-body: yes
+modified: 20220207172259189
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
@@ -32,22 +33,12 @@ type: text/vnd.tiddlywiki
 </div>
 \end
 
-<$tiddler tiddler=<<currentTab>>>
-<$let 
- pluginType    = {{!!plugin-draft}}
- namePrefix    = {{{ [<pluginType>addprefix[$:/]addsuffix[s/]] }}}
- pluginName    = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]last[1]]  }}}
- publisherName = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]first[1]] }}}
- pluginVersion = {{{ [<currentTiddler>get[version]else[0.0.0]] }}}
- timedate      = <<now "YYYY0MM0DD">>
-> 
-
-<!--- export button --->
+\define export-plugin-button()
 <div style="margin-bottom:10px;">
 <$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
 <$vars disabled-status={{{ [enlist<exportFilter>count[]match[0]then[yes]] }}} >
 <$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
-<$button class="ga-btn-export" disabled=<<disabled-status>> tooltip="export plugin as a packed json file">
+<$button class="tc-btn-invisible" disabled=<<disabled-status>> tooltip="export plugin as a packed json file">
 {{$:/core/images/export-button}}<span class="tc-btn-text">export plugin</span>
 <$action-sendmessage $message="tm-download-file" 
     $param="$:/plugins/kookma/gatha/export/jsonfile" 
@@ -61,6 +52,21 @@ type: text/vnd.tiddlywiki
 </$vars>
 </$set>
 </div>
+\end
+
+
+<$tiddler tiddler=<<currentTab>>>
+<$let 
+ pluginType    = {{!!plugin-draft}}
+ namePrefix    = {{{ [<pluginType>addprefix[$:/]addsuffix[s/]] }}}
+ pluginName    = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]last[1]]  }}}
+ publisherName = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]first[1]] }}}
+ pluginVersion = {{{ [<currentTiddler>get[version]else[0.0.0]] }}}
+ timedate      = <<now "YYYY0MM0DD">>
+> 
+
+<!--- export button --->
+<$macrocall $name=export-plugin-button />
 
 <!--- create the tab content for one plugin-draft --->
 <$macrocall $name=disp-plugin-tree plugin-name=<<pluginName>> publisher=<<publisherName>> />
