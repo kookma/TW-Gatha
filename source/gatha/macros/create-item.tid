@@ -1,5 +1,5 @@
 created: 20190328122950761
-modified: 20220207164207555
+modified: 20220208052553027
 title: $:/plugins/kookma/gatha/macros/create-item
 type: text/vnd.tiddlywiki
 
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
    value={{{[<plugin-full-path>addsuffix[/$type$]addsuffix[/$tidTitle$]]}}} 
    emptyValue={{{[<plugin-full-path>addsuffix[/$tidTitle$]]}}} 
 >
-<$button class=<<tv-config-toolbar-class>> > $btnCaption$
+<$button class="tc-btn-invisible" > $btnCaption$
 <$macrocall $name=unique-title baseTitle=<<newTitle>> template=<<__template__>> fields=<<__fields__>> />
 </$button>
 </$set>

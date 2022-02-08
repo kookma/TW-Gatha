@@ -1,6 +1,6 @@
 caption: add plugin icon
 created: 20220203085116186
-modified: 20220204090128824
+modified: 20220208051951002
 tags: $:/tags/Gatha/Action
 title: $:/plugins/kookma/gatha/actions/add-icon
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 <!-- create the icon tiddler, if exist navigate to it -->
 <$vars iconTemplate="$:/plugins/kookma/gatha/templates/icon" iconTiddlerTitle={{{ [<plugin-full-path>addsuffix[/icon]] }}}>
-<$button class=<<tv-config-toolbar-class>> > {{!!caption}}
+<$button class="tc-btn-invisible" > {{!!caption}}
 <$list filter="[<iconTiddlerTitle>is[missing]]" emptyMessage='<$action-navigate $to=<<iconTiddlerTitle>>/>' variable=ignore>
 <$action-sendmessage $message="tm-new-tiddler" $param=<<iconTemplate>> title=<<iconTiddlerTitle>> />
 </$list>

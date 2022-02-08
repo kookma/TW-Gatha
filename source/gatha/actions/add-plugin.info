@@ -1,7 +1,7 @@
 \define plugin-tiddler-within(title) $(namePrefix)$$(publisherName)$/$(pluginName)$/$title$
 \define plugin-title() $:/plugins/$(publisherName)$/$(pluginName)$
 
-<$button class=<<tv-config-toolbar-class>> >
+<$button class="tc-btn-invisible" >
 <<plugin-boilerplate-icon>>{{!!caption}}
 
 <$tiddler tiddler=<<plugin-tiddler-within "plugin.info">> >
