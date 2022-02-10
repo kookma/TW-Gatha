@@ -1,7 +1,7 @@
 caption: add boilerplate tiddlers
 created: 20190325083646838
 list: readme license history
-modified: 20220208051916602
+modified: 20220209040546344
 tags: $:/tags/Gatha/Action
 title: $:/plugins/kookma/gatha/actions/add-boilerplate
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "license">> $param="$:/plugins/kookma/gatha/templates/boilerplate/license" />
 <$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "readme">> $param="$:/plugins/kookma/gatha/templates/boilerplate/readme" />
 <$action-setfield $tiddler=<<plugin-full-path>> list=<<new-list>> />
-<<plugin-boilerplate-icon>>{{!!caption}}
+{{!!caption}}
 </$button>
 </$set>
 </$set>

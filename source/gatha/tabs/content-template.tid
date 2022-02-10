@@ -1,17 +1,31 @@
 created: 20220201123140487
 hide-body: yes
-modified: 20220208053154154
+modified: 20220210133706178
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-\define plugin-exported-filename() $(pluginType)$_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.json
 \define plugin-full-path() $(namePrefix)$$(publisherName)$/$(pluginName)$
+
+\define disp-export-buttons()
+<!-- export buttons -->
+<div>
+''Export plugin''<br><hr>
+<$list filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]] +[limit[1]]" variable=null emptyMessage="There is nothing to export!">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Gatha/ExportButton]!has[draft.of]sort[caption]]" variable=button>
+<div class="tc-menu-list-item" style="padding-left:14px;">
+<$transclude tiddler=<<button>> mode="inline"/>
+</div>
+</$list>
+</$list>
+</div>
+\end
+
 
 \define disp-plugin-tree(plugin-name, publisher)
 <!-- plugin actions -->
-<$set name="qp" value={{{[<plugin-full-path>prefix[$:/state/popup/]]>}}} >
+<$set name="qp" value={{{ [<plugin-full-path>addprefix[$:/state/popup/actions/]] >}}} >
 <$button popup=<<qp>> class="tc-btn-invisible" selectedClass="tc-selected">
 {{$:/core/images/down-arrow}}
 </$button>
@@ -25,32 +39,11 @@ type: text/vnd.tiddlywiki
 </$set>
 <!-- plugin author/name w. link -->
 <$link to=<<plugin-full-path>> />
-&nbsp;(<$count filter="[prefix<plugin-full-path>] -[<plugin-full-path>]" />)
+&nbsp;(<$count filter="[all[tiddlers+shadows]prefix<plugin-full-path>] -[<plugin-full-path>]" />)
 
 <!-- list of plugin contents -->
 <div class="tc-tree" style="padding:5px;padding-left:12px;">
   <$macrocall $name="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
-</div>
-\end
-
-\define export-plugin-button()
-<div style="margin-bottom:10px;">
-<$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
-<$vars disabled-status={{{ [enlist<exportFilter>count[]match[0]then[yes]] }}} >
-<$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
-<$button class="tc-btn-invisible" disabled=<<disabled-status>> tooltip="export plugin as a packed json file">
-{{$:/core/images/export-button}}<span class="tc-btn-text">export plugin</span>
-<$action-sendmessage $message="tm-download-file" 
-    $param="$:/plugins/kookma/gatha/export/jsonfile" 
-    exportFilter=<<exportFilter>> 
-    pluginType=<<pluginType>>
-    pluginTiddler=<<plugin-full-path>>
-    filename=<<plugin-exported-filename>>
-/>
-</$button>
-</$wikify>
-</$vars>
-</$set>
 </div>
 \end
 
@@ -65,12 +58,13 @@ type: text/vnd.tiddlywiki
  timedate      = <<now "YYYY0MM0DD">>
 > 
 
-<!--- export button --->
-<$macrocall $name=export-plugin-button />
-
 <!--- create the tab content for one plugin-draft --->
 <$macrocall $name=disp-plugin-tree plugin-name=<<pluginName>> publisher=<<publisherName>> />
 <!-- extra plugin tiddlers section -->
 {{||$:/plugins/kookma/gatha/extra/tiddlers-tree}}
+
+<!-- export button -->
+<$macrocall $name=disp-export-buttons />
+
 </$let>
 </$tiddler>

@@ -13,8 +13,9 @@
 <$action-setfield $index="core-version" $value={{{[<plugin-title>get[core-version]] ~[<version>]}}}    />
 <$action-setfield $index="source" $value={{{[<plugin-title>get[source]]}}}    />
 <$action-setfield $index="list" $value={{{[<plugin-title>get[list]]}}}    />
-<$action-setfield $index="plugin-type" $value={{{[<plugin-title>get[plugin-draft]]}}}    />
+<$action-setfield $index="parent-plugin" $value={{{[<plugin-title>get[parent-plugin]]}}}    />
 <$action-setfield $index="dependents" $value={{{[<plugin-title>get[dependents]]}}}    />
+<$action-setfield $index="plugin-type" $value={{{[<plugin-title>get[plugin-draft]]}}}    />
 <$action-navigate $to=<<currentTiddler>>/>
 </$tiddler>
 </$button>

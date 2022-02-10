@@ -1,6 +1,6 @@
 created: 20220201135412536
 list-before: $:/core/ui/ViewTemplate/plugin
-modified: 20220204084030248
+modified: 20220209065038676
 tags: 
 title: $:/plugins/kookma/gatha/ui/view-template-plugin-meta-data
 type: text/vnd.tiddlywiki
@@ -67,7 +67,7 @@ type: text/vnd.tiddlywiki
         pluginTid=<<currentTiddler>> >
         <$button class="tc-btn-invisible tc-tiddlylink" tooltip="create and update plugin.info"> update
           <$action-setfield $tiddler=<<infoTid>> $index="title"    $value=<<pluginTid>> />
-          <$list filter="name description author version core-version source list dependents" variable=idx>
+          <$list filter="name description author version core-version source list dependents parent-plugin" variable=idx>
             <$action-setfield $tiddler=<<infoTid>>  $index=<<idx>>    $value={{{[<pluginTid>get<idx>] }}}/>
           </$list>
 					<$action-setfield $tiddler=<<infoTid>>  $index="plugin-type"    $value={{{[<pluginTid>get[plugin-draft]] }}}/>
@@ -84,28 +84,20 @@ type: text/vnd.tiddlywiki
 
 <div class="ga-plugin-info">
   <table class="ga-plugin-info">
-    <$list filter="[all[current]removeprefix[$:/plugins/]]">
-    	<<plugin-info-filter "Plugin publisher" "[all[current]split[/]first[1]]">>
-    	<<plugin-info-filter "Plugin name" "[all[current]split[/]last[1]]">>
-    </$list>
-    <$list filter="[all[current]removeprefix[$:/themes/]]">
-    	<<plugin-info-filter "Theme publisher" "[all[current]split[/]first[1]]">>
-    	<<plugin-info-filter "Theme name" "[all[current]split[/]last[1]]">>
-    </$list>
-    <$list filter="[all[current]prefix[$:/core]]">
-    	<<plugin-info-row "Plugin publisher" "TiddlyWiki">>
-      <<plugin-info-row "Plugin name" "core">>
-    </$list>
+    <<plugin-info-filter "Plugin publisher" "[all[current]split[/]nth[3]]">>
+    <<plugin-info-filter "Plugin name" "[all[current]split[/]nth[4]]">>
     <<plugin-info-field "Version" "version">>
     <$macrocall $name="plugin-info-field-plugin-type" name="Plugin type" />
     <<plugin-info-field "Display name" "name">>
     <<plugin-info-field "Description" "description">>
+    <<plugin-info-field "Information tabs" "list">>		
     <<plugin-info-field "Author" "author">>
     <$macrocall $name="plugin-info-field-link" name="Source" field="source" />
+    <<plugin-info-field "Plugin parent" "parent-plugin">>			
     <<plugin-info-field "Plugin priority" "plugin-priority">>
-    <<plugin-info-field "Plugin dependencies" "dependents">>	
+		<<plugin-info-field "Plugin dependencies" "dependents">>	
     <<plugin-info-field "Required TW Core version" "core-version">>
     <<update-plugin-info "Plugin.info">>
   </table>
 </div>
-</$list>
+</$list> 

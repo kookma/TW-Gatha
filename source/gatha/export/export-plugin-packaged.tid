@@ -1,0 +1,27 @@
+caption: export json file
+created: 20220208103953299
+modified: 20220208151024268
+tags: $:/tags/Gatha/ExportButton
+title: $:/plugins/kookma/gatha/export/export-plugin-packaged
+type: text/vnd.tiddlywiki
+
+\define plugin-exported-json-filename() $(pluginType)$_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.json
+
+\define export-packaged-plugin()
+<$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
+<$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
+<$button class="tc-btn-invisible" tooltip="export plugin as a packed json file">
+{{$:/core/images/list}}<span class="tc-btn-text">packaged plugin (json file)</span>
+<$action-sendmessage $message="tm-download-file" 
+    $param="$:/plugins/kookma/gatha/export/jsonfile" 
+    exportFilter=<<exportFilter>> 
+    pluginType=<<pluginType>>
+    pluginTiddler=<<plugin-full-path>>
+    filename=<<plugin-exported-json-filename>>
+/>
+</$button>
+</$wikify>
+</$set>
+\end
+
+<<export-packaged-plugin>>

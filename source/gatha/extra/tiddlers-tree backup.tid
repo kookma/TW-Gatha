@@ -1,0 +1,37 @@
+created: 20220210112112765
+modified: 20220210112119272
+tags: 
+title: $:/plugins/kookma/gatha/extra/tiddlers-tree backup
+type: text/vnd.tiddlywiki
+
+\define tempTid() $:/temp/$(currentTiddler)$
+
+<div style="margin-bottom:8px" title="drop tiddlers here">
+<$vars extratiddlerNumber= {{{ [enlist{!!extra-tiddlers}count[]] }}}>
+Extra tiddlers (<$text text=<<extratiddlerNumber>> />)&nbsp;
+<$list filter="[<extratiddlerNumber>compare:integer:gt[0]]" variable=null><!-- show button is there is any extra tiddlers -->
+<$button tooltip="edit mode" class="tc-btn-invisible ga-btn-edit">
+<$transclude tiddler={{{ [<tempTid>get[text]match[show]then[$:/core/images/done-button]else[$:/core/images/edit-button]]} }}}/>
+<$action-listops $tiddler=<<tempTid>> $field="text" $subfilter="+[toggle[show]]" />
+</$button>
+</$list>
+</$vars>
+</div>
+
+<!-- draggable list of extra tiddlers -->
+<$let
+  viewTemplate="$:/plugins/kookma/gatha/extra/item-template"
+  editTemplate="$:/plugins/kookma/gatha/extra/remove-template"
+  selectedTemplate={{{ [<tempTid>get[text]match[show]then<editTemplate>else<viewTemplate>] }}}
+>
+<div class="tc-tree">
+<$macrocall $name="list-links-draggable"
+  tiddler=<<currentTiddler>>
+  field="extra-tiddlers"
+  type="ol"
+  subtype="li"
+  class=""
+  itemTemplate=<<selectedTemplate>>
+/>
+</div>
+</$let>

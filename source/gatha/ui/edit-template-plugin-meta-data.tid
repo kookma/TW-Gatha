@@ -1,6 +1,6 @@
 created: 20220201135853103
 list-before: $:/core/ui/EditTemplate/body
-modified: 20220206193955475
+modified: 20220209063826936
 tags: 
 title: $:/plugins/kookma/gatha/ui/edit-template-plugin-meta-data
 type: text/vnd.tiddlywiki
@@ -71,8 +71,9 @@ The update-draft-title-action used by select widget to update title of draft plu
 	<<plugin-edit-row "Description" "description" "Tell TiddlyWiki users about what your plugin does">>
 	<<plugin-edit-row "Author" "author" "U. K. Known">>
 	<<plugin-edit-row "Source" "source" "https://example.org/foo">>
+	<<plugin-edit-row "Plugin parent"   "parent-plugin" "e.g. $:/plugins/kookma/utility">>	
 	<<plugin-edit-row "Plugin priority" "plugin-priority" "">>
-	<<plugin-edit-row "Plugin dependencies" "dependents" "Plugins that should be installed in order for this one to work">>	
+	<<plugin-edit-row "Plugin dependencies" "dependents" "Plugins required by this one e.g. $:/plugins/kookma/shiraz">>	
 	<<plugin-edit-row "Required TW Core version" "core-version" ">=5.1.23">>
 </table>
 </div>
