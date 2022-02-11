@@ -1,0 +1,25 @@
+created: 20220211065912093
+modified: 20220211093944167
+tags: 
+title: $:/plugins/kookma/gatha/extra/search-inputbox
+type: text/vnd.tiddlywiki
+
+\define tempTid() $:/temp/gatha/add-bulk
+
+\define clear-action()
+<$action-setfield $tiddler=<<tempTid>> $field="text" $value=""/>
+\end
+
+\define clearButton()
+<$list filter="[<tempTid>get[text]trim[]!is[blank]]" variable=null>
+<$button class="tc-btn-invisible" actions=<<clear-action>> >{{$:/core/images/close-button}}</$button>
+</$list>
+\end
+
+\define add-bulk-extra-tiddlers(label, placeholder:"", addbutton)
+<div class="tc-search tc-advanced-search">
+<$keyboard actions=<<clear-action>> key="escape">
+$label$: <$edit-text tiddler=<<tempTid>> tag=input default="" placeholder="$placeholder$" focus={{$:/config/Search/AutoFocus}}/>
+</$keyboard> <<clearButton>> $addbutton$
+</div>
+\end

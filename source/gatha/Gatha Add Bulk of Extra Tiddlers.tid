@@ -1,0 +1,10 @@
+created: 20220210172215455
+modified: 20220211100141045
+tags: 
+target-plugin: $:/plugins/kookma/bahar
+title: Gatha Add Bulk of Extra Tiddlers
+type: text/vnd.tiddlywiki
+
+<<tabs 
+  tabsList:"[all[tiddlers+shadows]tag[$:/tags/Gatha/Search]!has[draft.of]sort[title]]" 
+  default:"$:/plugins/kookma/gatha/extra/search-filter">>

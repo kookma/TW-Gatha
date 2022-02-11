@@ -1,0 +1,27 @@
+caption: Filter search
+created: 20220211064639323
+modified: 20220211093944170
+tags: $:/tags/Gatha/Search
+title: $:/plugins/kookma/gatha/extra/search-filter
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/extra/search-inputbox
+
+\define add-by-filter-Button()
+<$list filter="[subfilter{$(tempTid)$}] :filter[has[title]]  +[limit[1]]" variable=null>
+<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin">{{$:/core/images/clone-button}}
+<$action-listops $tiddler={{!!target-plugin}} $field="extra-tiddlers" $subfilter={{{ [<tempTid>get[text]] }}} />
+</$button>
+</$list>
+\end
+
+
+Target plugin: {{!!target-plugin}}
+
+<$macrocall $name="add-bulk-extra-tiddlers" label="Search by filter" placeholder="enter a filter e.g [tag[doc]]" addbutton=<<add-by-filter-Button>> /> 
+
+<$vars resultFilter={{{ [<tempTid>get[text]] }}} >
+<small>//Search result (<$count filter="[subfilter<resultFilter>] :filter[has[title]]" /> matches)//</small>
+
+<$list filter="[subfilter<resultFilter>] :filter[has[title]]" template="$:/core/ui/ListItemTemplate"/>
+</$vars>

@@ -1,0 +1,45 @@
+caption: Hierarchical search
+created: 20220211064820107
+modified: 20220211093944170
+tags: $:/tags/Gatha/Search
+title: $:/plugins/kookma/gatha/extra/search-hierarchical
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/extra/search-inputbox
+
+\define toc-list(here,max,exclude,level:"1")
+<!-- SHOW ALL TOC TIDDLER TITLES AS A FLAT LIST (SIMPLE RECURSION) Credit: Eric Shulman-->
+<$list filter="""[tag[$here$]] $exclude$ -[[$here$]]""">
+   <$text text={{{ [<currentTiddler>format:titlelist[]] }}}/><br>
+   <$reveal default="$level$" type="nomatch" text="$max$">
+      <$macrocall $name="toc-list" here=<<currentTiddler>> max="$max$" exclude="""$exclude$ -[[$here$]]""" level={{{ [[$level$]add[1]] }}}/>
+   </$reveal>
+</$list>
+\end
+
+\define add-hierarchical-list-Button()
+<$wikify name=allTiddlers text="""<$macrocall $name=toc-list here={{{ [<tempTid>get[text]trim[]!search:title<lb>!search<rb>] }}}/>""" >
+<$list filter="[enlist<allTiddlers>has[title]limit[1]]" variable=null>
+<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin">{{$:/core/images/clone-button}}
+<$action-listops $tiddler={{!!target-plugin}} $field="extra-tiddlers" $subfilter="[enlist<allTiddlers>]" />
+</$button>
+</$list>
+</$wikify>
+\end
+
+
+Target plugin: {{!!target-plugin}}
+
+<$vars lb="[" rb="]">
+<$macrocall $name="add-bulk-extra-tiddlers" label="Root tag" placeholder="enter a root tag e.g Contents" addbutton=<<add-hierarchical-list-Button>> />
+
+<$wikify name=allTiddlers text="""<$macrocall $name=toc-list here={{{ [<tempTid>get[text]trim[]!search:title<lb>!search<rb>] }}}/>""" >
+<small>//Search result (<$count filter="[enlist<allTiddlers>] :filter[has[title]]" /> matches)//</small>
+<$list filter="[enlist<allTiddlers>] :filter[has[title]]" template="$:/core/ui/ListItemTemplate"/>
+</$wikify>
+</$vars>
+
+<!-- remarks
+The two $wikify here are used to prevent focus loss on edit-text.
+If a better solution is found remove them
+-->

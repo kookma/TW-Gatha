@@ -1,6 +1,6 @@
 created: 20220201123140487
 hide-body: yes
-modified: 20220210133706178
+modified: 20220210162821395
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 \define disp-export-buttons()
 <!-- export buttons -->
-<div>
+<div style="margin-top:10px;">
 ''Export plugin''<br><hr>
 <$list filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]] +[limit[1]]" variable=null emptyMessage="There is nothing to export!">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Gatha/ExportButton]!has[draft.of]sort[caption]]" variable=button>

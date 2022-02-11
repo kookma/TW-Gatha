@@ -1,20 +1,8 @@
 created: 20220203025826558
-modified: 20220207173158051
+modified: 20220211094028747
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
-
-/* remove button in extra tiddler list */
-.ga-btn-remove{
-	width:  1em;
-	height: 1em;
-}
-
-.tc-tree .ga-btn-remove svg {
-	font-size:0.75em;
-	vertical-align: baseline;
-}
-
 
 /*--------------- correct button svg color in sidebar */
  .ga-sidebar button svg {
@@ -41,4 +29,13 @@ type: text/vnd.tiddlywiki
 
 .ga-sidebar .tc-tree li span{
 	color:<<colour sidebar-tiddler-link-foreground>>; 
+}
+
+/*--- for the add bulk of tiddlers button */
+.ga-extra-button{
+opacity:0.4;
+}
+
+.ga-extra-label:hover .ga-extra-button{
+  opacity:1;
 }

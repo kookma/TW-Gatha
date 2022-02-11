@@ -1,10 +1,11 @@
 created: 20220203060016202
-modified: 20220210131139140
+modified: 20220211095113734
 tags: 
 title: $:/plugins/kookma/gatha/extra/tiddlers-tree
 type: text/vnd.tiddlywiki
 
 \whitespace trim
+\define tid-addExtraTiddlers-ui() Gatha Add Bulk of Extra Tiddlers
 
 \define clear-all()
 <$list filter="[list[!!extra-tiddlers]count[]!match[0]]" variable="null" emptyMessage="drop tiddlers here">
@@ -47,9 +48,14 @@ $button$
 </$droppable>
 \end
 
+\define add-bulk-tiddler()
+<$button to=<<tid-addExtraTiddlers-ui>> class="tc-btn-invisible ga-extra-button" tooltip="add bulk of tiddlers"> {{$:/core/images/clone-button}}
+<$action-setfield $tiddler=<<tid-addExtraTiddlers-ui>> $field="target-plugin" $value=<<currentTiddler>> />
+</$button>
+\end
 
-<div style="margin-bottom:0px" title="drop tiddlers here">
-Extra tiddlers (<$count filter="[enlist{!!extra-tiddlers}]" />)
+<div class="ga-extra-label" title="drop tiddlers here">
+<<add-bulk-tiddler>> &nbsp; Extra tiddlers (<$count filter="[enlist{!!extra-tiddlers}]" />)
 </div>
 
 <!-- draggable list of extra tiddlers -->
