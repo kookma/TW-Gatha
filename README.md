@@ -1,4 +1,4 @@
-# TW-Gatha
+# Gatha Plugin Maker
 Create Tiddlywiki plugins in browser. Supports both single file Tiddlywiki and Node.JS (client server).
 
 * With Gatha it is very easy and straightforward to create any types of plugins (theme, language, media)
