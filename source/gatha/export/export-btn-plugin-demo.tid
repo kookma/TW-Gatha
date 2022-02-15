@@ -1,0 +1,32 @@
+caption: export plugin+empty.jtml
+created: 20220208104449795
+modified: 20220215065309855
+tags: $:/tags/Gatha/ExportButton
+title: $:/plugins/kookma/gatha/export/export-btn-plugin-demo
+type: text/vnd.tiddlywiki
+
+\define plugin-exported-demo-filename() demo_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.html
+
+\define publishFilter() 
+<$button message="tm-edit-tiddler" 
+    param="$:/config/$(publisherName)$/$(pluginName)$/PublishFilter"
+    class="tc-btn-invisible" 
+    tooltip="edit plugin plublish filter">...
+</$button>
+\end
+
+\define export-demo-html()
+<$button class="tc-btn-invisible" tooltip="export plugin in a working demo wiki">
+{{$:/core/images/globe}}<span class="tc-btn-text">plugin demo (demo.html)</span>
+<$action-sendmessage 
+    $message="tm-download-file"
+    $param="$:/plugins/kookma/gatha/export/download-empty"
+    filename=<<plugin-exported-demo-filename>>
+    currentTiddler=<<plugin-full-path>>
+    publisherName=<<publisherName>>
+    pluginName=<<pluginName>>
+/>
+</$button>&nbsp; <<publishFilter>>
+\end
+
+<<export-demo-html>>

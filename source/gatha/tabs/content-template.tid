@@ -1,6 +1,6 @@
 created: 20220201123140487
 hide-body: yes
-modified: 20220210162821395
+modified: 20220211120107513
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
@@ -42,7 +42,7 @@ type: text/vnd.tiddlywiki
 &nbsp;(<$count filter="[all[tiddlers+shadows]prefix<plugin-full-path>] -[<plugin-full-path>]" />)
 
 <!-- list of plugin contents -->
-<div class="tc-tree" style="padding:5px;padding-left:12px;">
+<div class="tc-tree" style="padding:6px 6px 6px 12px;">
   <$macrocall $name="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
 </div>
 \end

@@ -1,10 +1,10 @@
 created: 20220211102040369
-modified: 20220211102630084
+modified: 20220211103701344
 tags: 
 title: $:/plugins/kookma/gatha/readme
 type: text/vnd.tiddlywiki
 
-; Gatha
+; Gatha Plugin Maker
 Create Tiddlywiki plugins, themes, languages in browser in an easy way and distribute as packaged JSON file or Node.JS plugin folder!
 
 ;Code and demo

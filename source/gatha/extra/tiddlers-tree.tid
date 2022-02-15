@@ -1,14 +1,14 @@
 created: 20220203060016202
-modified: 20220211095113734
+modified: 20220211144421242
 tags: 
 title: $:/plugins/kookma/gatha/extra/tiddlers-tree
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-\define tid-addExtraTiddlers-ui() Gatha Add Bulk of Extra Tiddlers
+\import $:/plugins/kookma/gatha/macros/definition
 
 \define clear-all()
-<$list filter="[list[!!extra-tiddlers]count[]!match[0]]" variable="null" emptyMessage="drop tiddlers here">
+<$list filter="[list[!!extra-tiddlers]count[]!match[0]]" variable="null" emptyMessage="&nbsp;drop tiddlers here">
 <$button class="tc-btn-invisible tc-btn-mini" tooltip="remove all extra tiddlers" >remove all
 <$action-confirm $message="Do you wish to remove all extra tiddlers?">
 <$action-setfield $tiddler=<<gv-extra-list>> $field="extra-tiddlers" $value=""/>
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 
 
 \define drop-actions()
-<$list filter="[<actionTiddler>!prefix<gv-extra-list>]" variable=null><!-- don ot allow to drop tiddlers from the same plugin -->
+<$list filter="[<actionTiddler>!prefix<gv-extra-list>] :filter[has[title]]" variable=null><!-- don ot allow to drop tiddlers from the same plugin -->
 <$action-listops $tiddler=<<gv-extra-list>> $field="extra-tiddlers" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 </$list>
 \end
@@ -55,7 +55,8 @@ $button$
 \end
 
 <div class="ga-extra-label" title="drop tiddlers here">
-<<add-bulk-tiddler>> &nbsp; Extra tiddlers (<$count filter="[enlist{!!extra-tiddlers}]" />)
+<$list filter="[<tidConfig>getindex[add-tiddlers]match[show]]" variable=null><<add-bulk-tiddler>> &nbsp; </$list>
+Extra tiddlers (<$count filter="[enlist{!!extra-tiddlers}]" />)
 </div>
 
 <!-- draggable list of extra tiddlers -->

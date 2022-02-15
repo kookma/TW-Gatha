@@ -1,9 +1,9 @@
 caption: export zip file
 created: 20220208104324219
 hide-body: yes
-modified: 20220208151134241
+modified: 20220215054944327
 tags: $:/tags/Gatha/ExportButton
-title: $:/plugins/kookma/gatha/export/export-plugin-zipped
+title: $:/plugins/kookma/gatha/export/export-btn-plugin-zipped
 type: text/vnd.tiddlywiki
 
 \whitespace trim
@@ -51,7 +51,7 @@ type: text/vnd.tiddlywiki
 
 
 \define export-zipped-plugin()
-<$button actions=<<delete-temp-action>> class="tc-btn-invisible">
+<$button actions=<<delete-temp-action>> class="tc-btn-invisible" tooltip="export plugin folder to be used with Tiddlywiki on Node.js">
   {{$:/core/images/storyview-classic}}<span class="tc-btn-text">plugin folder (zip file)</span>
   <<renderContent>>
 </$button>

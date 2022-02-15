@@ -1,7 +1,7 @@
-created: 20220202052403295
-modified: 20220204175200034
-tags: 
-title: $:/plugins/kookma/gatha/export/jsonfile
+created: 20220212162136459
+modified: 20220213191214482
+tags: show-content
+title: $:/plugins/kookma/gatha/export/json-template
 type: text/vnd.tiddlywiki
 
 \define plugin-shadow-tiddlers()
@@ -12,9 +12,12 @@ type: text/vnd.tiddlywiki
 }
 \end
 
+<$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
 <$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
-<$jsontiddler tiddler=<<pluginTiddler>> 
- $plugin-type=<<pluginType>>
+<$jsontiddler tiddler=<<currentTiddler>> 
+ $plugin-type={{!!plugin-draft}}
  $text=<<pluginShadows>>
+ exclude="plugin-draft extra-tiddlers"
  escapeUnsafeScriptChars="yes" />
 </$wikify>
+</$set>

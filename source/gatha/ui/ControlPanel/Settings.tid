@@ -1,0 +1,49 @@
+caption: Gatha
+created: 20220211122052524
+list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
+modified: 20220215103243509
+tags: $:/tags/ControlPanel/SettingsTab $:/tags/MoreSideBar
+title: $:/plugins/kookma/gatha/ui/ControlPanel/Settings
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/definition
+\define tidToggleVisibility() $:/temp/gatha/fields-visibility
+
+\define hiddenFields() author core-version description extra-tiddlers name plugin-priority plugin-type parent-plugin plugin-draft source version
+
+\define toggle-plugin-fields-visibility()
+<$vars status={{{[<tidToggleVisibility>get[text]] :map[match[hide]then[show]] :else[[hide]] }}} >
+<$button class="tc-btn-invisible" tooltip="hide/show plugin fields in edit mode">
+{{$:/plugins/kookma/gatha/images/toggle}}<span class="tc-btn-text">toggle fileds visibility</span>
+<$list filter="[enlist<hiddenFields>addprefix[$:/config/EditTemplateFields/Visibility/]]">
+<$action-setfield $field=text $value=<<status>> />
+</$list>
+<$action-listops $tiddler=<<tidToggleVisibility>> $field="text" $subfilter="+[toggle[hide]]" />
+</$button>
+</$vars>
+\end
+
+These settings let you customise the behaviour of Gatha plugin.
+
+---
+
+;Show Gatha setting in more sidebar
+:<$checkbox tiddler="$:/plugins/kookma/gatha/ui/ControlPanel/Settings" tag="$:/tags/MoreSideBar"> Show setting in more sidebar</$checkbox>
+
+; Hide Gatha in sidebar
+:<$checkbox tiddler="$:/plugins/kookma/gatha/ui/sidebar" tag="$:/tags/SideBar"> Disable Gatha development interface</$checkbox>
+
+<dl>
+<dt>Hide plugin fields</dt>
+<dd> <<toggle-plugin-fields-visibility>> </dd>
+<$list filter="[enlist<hiddenFields>addprefix[$:/config/EditTemplateFields/Visibility/]]">
+<dd><$checkbox tiddler=<<currentTiddler>> field=text checked="hide" unchecked="show" default="show"> <$link/></$checkbox></dd>
+</$list>
+</dl> 
+
+;Global publish filter ($:/config/gatha/PublishFilter)
+:<$edit-text tiddler="$:/config/gatha/PublishFilter" field=text class="ga-edit-publish"/>
+
+;Advanced ptions
+:<$checkbox tiddler=<<tidConfig>> index="load-plugin" checked="show" unchecked="hide" default="hide"> Show load-plugin button</$checkbox>
+:<$checkbox tiddler=<<tidConfig>> index="add-tiddlers" checked="show" unchecked="hide" default="hide"> Show add extra tiddlers button</$checkbox>

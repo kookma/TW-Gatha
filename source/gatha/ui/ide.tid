@@ -1,0 +1,24 @@
+created: 20220215072303432
+modified: 20220215072346738
+tags: 
+title: $:/plugins/kookma/gatha/ui/ide
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/macros/create-plugin
+\import $:/plugins/kookma/gatha/macros/load-plugin
+\import $:/plugins/kookma/gatha/macros/definition
+
+<div class="ga-sidebar">
+
+<<create-new-plugin>><$list filter="[<tidConfig>getindex[load-plugin]match[show]]" variable=null> | <<load-plugin-ui>></$list>
+
+
+<!-- creats tabs from plugin drafts -->
+<$macrocall $name="tabs"
+ tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]]" 
+ default=   {{{ [all[tiddlers]has:field[plugin-draft]first[]] }}}
+ buttonTemplate="$:/plugins/kookma/gatha/tabs/button-template"
+ template="$:/plugins/kookma/gatha/tabs/content-template"
+ class="tc-vertical"
+ />
+ </div>

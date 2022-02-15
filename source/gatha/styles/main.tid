@@ -1,11 +1,11 @@
 created: 20220203025826558
-modified: 20220211094028747
+modified: 20220215071824340
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
 
 /*--------------- correct button svg color in sidebar */
- .ga-sidebar button svg {
+.ga-sidebar button svg {
 	fill: <<colour sidebar-tiddler-link-foreground>>;
 }
 .ga-sidebar button:hover svg {
@@ -33,9 +33,34 @@ type: text/vnd.tiddlywiki
 
 /*--- for the add bulk of tiddlers button */
 .ga-extra-button{
-opacity:0.4;
+	opacity:0.4;
 }
 
 .ga-extra-label:hover .ga-extra-button{
-  opacity:1;
+	opacity:1;
+}
+
+/*--------------- extra tiddlers tree */
+.ga-sidebar .tc-sidebar-tab-open .tc-sidebar-tab-open-item button svg {
+	fill: <<colour sidebar-tiddler-link-foreground>>;
+}
+.ga-sidebar .tc-sidebar-tab-open .tc-sidebar-tab-open-item:hover  button svg {
+	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+/*--- toggle in add extra tiddlers ui */
+
+.tc-btn-invisible.ga-toggle-result  svg {
+	fill: <<colour sidebar-tiddler-link-foreground>>;
+	width:1.1em;
+	height:1.1em;
+}
+.tc-btn-invisible.ga-toggle-result:hover svg {
+	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+/*ther ui elements */
+.ga-edit-publish{
+  width:95%;
+  margin-top:5px;
 }
