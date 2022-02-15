@@ -1,11 +1,11 @@
 created: 20220215072303432
-modified: 20220215072346738
+modified: 20220215181150336
 tags: 
 title: $:/plugins/kookma/gatha/ui/ide
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/macros/create-plugin
-\import $:/plugins/kookma/gatha/macros/load-plugin
+\import $:/plugins/kookma/gatha/import/load-plugin
 \import $:/plugins/kookma/gatha/macros/definition
 
 <div class="ga-sidebar">
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 
 <!-- creats tabs from plugin drafts -->
 <$macrocall $name="tabs"
- tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]]" 
+ tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]] :sort[split[/]!is[blank]nth[4]]" 
  default=   {{{ [all[tiddlers]has:field[plugin-draft]first[]] }}}
  buttonTemplate="$:/plugins/kookma/gatha/tabs/button-template"
  template="$:/plugins/kookma/gatha/tabs/content-template"

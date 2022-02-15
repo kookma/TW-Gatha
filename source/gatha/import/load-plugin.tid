@@ -1,7 +1,7 @@
 created: 20220210134436854
-modified: 20220210162501804
+modified: 20220215202754831
 tags: 
-title: $:/plugins/kookma/gatha/macros/load-plugin
+title: $:/plugins/kookma/gatha/import/load-plugin
 type: text/vnd.tiddlywiki
 
 \define loadTid() $:/temp/gatha/load
@@ -9,17 +9,31 @@ type: text/vnd.tiddlywiki
 
 \define load-actions()
 <$tiddler tiddler={{{ [<loadTid>get[text]] }}} >
+<$action-confirm $message="Do you wish to load selected plugin into Gatha and convert it to a draft? This action cannot be undone!">
+<!--(1) load extra tiddlers and create plugin-draft ----->
 <$list filter="[all[current]!has[plugin-draft]]"><!-- if plugin is loaded, do not load agin -->
 <$action-setfield $field="plugin-draft" $value={{!!plugin-type}} />
 <$set name=shadows filter="[all[current]plugintiddlers[]!prefix<currentTiddler>]">
 <$action-setfield $field="extra-tiddlers" $value=<<shadows>> />
 </$set>
-</$tiddlers>
+</$list>
+<!--(2) convert shadow tiddlers to real tiddlers ----->
+<$list filter="[all[current]plugintiddlers[]]">
+<$action-setfield $field=modified $value=<<now "YYYY0MM0DD0hh0mm0ssXXX">> />
+</$list>
+<!--(3) delete plugin-type and text ----->
+<$action-deletefield text plugin-type/>
+<!--(4) notify user to save and relaod -->
+<$action-sendmessage $message="tm-notify" $param="$:/plugins/kookma/gatha/import/notify-template" currentPlugin=<<currentTiddler>> />
+</$action-confirm>
+</$tiddler>
+<$action-deletetiddler $tiddler="$:/temp/popup/gatha/select-plugin"/> 
+<$action-deletetiddler $tiddler=<<loadTid>> /> 
 \end
 
 \define select-to-load()
 <$set name=plugins filter="[all[shadows+tiddlers]plugin-type[plugin]sort[name]] -[enlist<excluded-plugins>]" >
-Select plugin to modify <$select tiddler=<<loadTid>> default={{{ [enlist<plugins>first[]] }}} actions=<<load-actions>> >
+Select plugin to modify <$select tiddler=<<loadTid>> default={{{ [enlist<plugins>first[]] }}} >
 <optgroup label='Plugins'>
 <$list filter="[enlist<plugins>]">
 <option value=<<currentTiddler>>><$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}} /></option>
@@ -45,6 +59,13 @@ Select plugin to modify <$select tiddler=<<loadTid>> default={{{ [enlist<plugins
 <div class="tc-drop-down">
 
 <<select-to-load>>
+
+<$list filter="[<loadTid>get[text]]" variable=selected-plugin >
+<$button class="tc-btn-invisible tc-tiddlylink" style="margin:5px 0; padding:0;" actions=<<load-actions>> disabled=<<disabled>> >
+{{$:/core/images/edit-button}}
+<span class="tc-btn-text">Load <$text text=<<selected-plugin>> /></span>
+</$button>
+</$list>
 </div>
 </$reveal>
 \end
