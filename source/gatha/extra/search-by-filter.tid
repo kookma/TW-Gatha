@@ -1,16 +1,23 @@
 caption: Filter search
 created: 20220211064639323
-modified: 20220217162752990
+modified: 20220217180502176
 tags: $:/tags/Gatha/Search
 title: $:/plugins/kookma/gatha/extra/search-by-filter
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/extra/search-inputbox
 
+\define btn-actions()
+<$action-listops $tiddler={{!!target-plugin}} 
+  $field={{{[<modifier>match[ctrl]then[resource-tiddlers]else[extra-tiddlers]]}}} 
+  $subfilter={{{ [<tempTid>get[text]] }}} 
+/>
+\end
+
 \define add-by-filter-Button()
 <$list filter="[subfilter{$(tempTid)$}] :filter[has[title]]  +[limit[1]]" variable=null>
-<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin">{{$:/core/images/clone-button}}
-<$action-listops $tiddler={{!!target-plugin}} $field="extra-tiddlers" $subfilter={{{ [<tempTid>get[text]] }}} />
+<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin" actions=<<btn-actions>> >
+{{$:/core/images/clone-button}}
 </$button>
 </$list>
 \end

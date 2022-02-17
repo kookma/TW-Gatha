@@ -1,6 +1,6 @@
 caption: Hierarchical search
 created: 20220211064820107
-modified: 20220217112628341
+modified: 20220217180731342
 tags: $:/tags/Gatha/Search
 title: $:/plugins/kookma/gatha/extra/search-by-hierarchy
 type: text/vnd.tiddlywiki
@@ -18,11 +18,18 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
+\define btn-actions()
+<$action-listops $tiddler={{!!target-plugin}} 
+  $field={{{[<modifier>match[ctrl]then[resource-tiddlers]else[extra-tiddlers]]}}} 
+  $subfilter="[enlist<allTiddlers>]" 
+/>
+\end
+
 \define add-by-hierarchy-Button()
 <$wikify name=allTiddlers text="""<$macrocall $name=toc-list here={{{ [<tempTid>get[text]trim[]!search:title<lb>!search<rb>] }}}/>""" >
 <$list filter="[enlist<allTiddlers>has[title]limit[1]]" variable=null>
-<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin">{{$:/core/images/clone-button}}
-<$action-listops $tiddler={{!!target-plugin}} $field="extra-tiddlers" $subfilter="[enlist<allTiddlers>]" />
+<$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin" actions=<<btn-actions>> >
+{{$:/core/images/clone-button}}
 </$button>
 </$list>
 </$wikify>
