@@ -1,5 +1,5 @@
-# Gatha Plugin Maker
-Create Tiddlywiki plugins in browser. Supports both single file Tiddlywiki and Node.JS (client server).
+# Gatha Studio Workspace
+Create Tiddlywiki plugins, themes, languages, editions, contents in browser in an easy way and distribute as packaged JSON file, Node.JS plugin folder, or a Tiddlywiki app.
 
 * With Gatha it is very easy and straightforward to create any types of plugins (theme, language, media)
 * Use Gatha to create media plugins from contents like course notes, presentations, pamphlets, ebooks
