@@ -1,7 +1,7 @@
 caption: Gatha
 created: 20220211122052524
 list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
-modified: 20220215103243509
+modified: 20220217162616828
 tags: $:/tags/ControlPanel/SettingsTab $:/tags/MoreSideBar
 title: $:/plugins/kookma/gatha/ui/ControlPanel/Settings
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \import $:/plugins/kookma/gatha/macros/definition
 \define tidToggleVisibility() $:/temp/gatha/fields-visibility
 
-\define hiddenFields() author core-version description extra-tiddlers name plugin-priority plugin-type parent-plugin plugin-draft source version
+\define hiddenFields() author core-version description extra-tiddlers name plugin-priority plugin-type parent-plugin plugin-draft resource-tiddlers source version
 
 \define toggle-plugin-fields-visibility()
 <$vars status={{{[<tidToggleVisibility>get[text]] :map[match[hide]then[show]] :else[[hide]] }}} >
@@ -47,3 +47,4 @@ These settings let you customise the behaviour of Gatha plugin.
 ;Advanced ptions
 :<$checkbox tiddler=<<tidConfig>> index="load-plugin" checked="show" unchecked="hide" default="hide"> Show load-plugin button</$checkbox>
 :<$checkbox tiddler=<<tidConfig>> index="add-tiddlers" checked="show" unchecked="hide" default="hide"> Show add extra tiddlers button</$checkbox>
+:<$checkbox tiddler=<<tidConfig>> index="res-tiddlers" checked="show" unchecked="hide" default="hide"> Show resource tiddlers section</$checkbox>

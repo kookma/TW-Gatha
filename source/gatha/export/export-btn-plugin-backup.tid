@@ -1,6 +1,6 @@
 caption: plugin source backup
 created: 20220215052330147
-modified: 20220215065643067
+modified: 20220217134613850
 tags: $:/tags/Gatha/ExportButton
 title: $:/plugins/kookma/gatha/export/export-btn-plugin-backup
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 \define plugin-exported-backup-json-filename() backup_$(pluginType)$_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.json
 
 \define export-plugin-source()
-<$set name=exportFilter filter="[prefix<currentTiddler>] [enlist{!!extra-tiddlers}] [[$:/config/$(publisherName)$/$(pluginName)$/PublishFilter]has[title]]">
+<$set name=exportFilter filter="[prefix<currentTiddler>] [enlist{!!extra-tiddlers}] [enlist{!!resource-tiddlers}] [[$:/config/$(publisherName)$/$(pluginName)$/PublishFilter]has[title]]">
 <$button class="" dragFilter=<<exportFilter>> class="tc-btn-invisible" tooltip="export plugin source as a json file">
 {{$:/core/images/export-button}}<span class="tc-btn-text">plugin source (backup json file)</span>
 <$action-sendmessage $message="tm-download-file" 

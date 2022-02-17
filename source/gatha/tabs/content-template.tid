@@ -1,6 +1,6 @@
 created: 20220201123140487
 hide-body: yes
-modified: 20220211120107513
+modified: 20220217132040524
 tags: 
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
@@ -61,7 +61,10 @@ type: text/vnd.tiddlywiki
 <!--- create the tab content for one plugin-draft --->
 <$macrocall $name=disp-plugin-tree plugin-name=<<pluginName>> publisher=<<publisherName>> />
 <!-- extra plugin tiddlers section -->
-{{||$:/plugins/kookma/gatha/extra/tiddlers-tree}}
+{{||$:/plugins/kookma/gatha/extra/extra-tiddlers}}
+
+<!-- test and debug section -->
+{{||$:/plugins/kookma/gatha/extra/resource-tiddlers}}
 
 <!-- export button -->
 <$macrocall $name=disp-export-buttons />

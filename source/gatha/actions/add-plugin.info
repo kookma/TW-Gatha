@@ -1,10 +1,7 @@
 \define plugin-tiddler-within(title) $(namePrefix)$$(publisherName)$/$(pluginName)$/$title$
 \define plugin-title() $:/plugins/$(publisherName)$/$(pluginName)$
 
-<$button class="tc-btn-invisible" >
-<<plugin-boilerplate-icon>>{{!!caption}}
-
-<$tiddler tiddler=<<plugin-tiddler-within "plugin.info">> >
+\define addInfo-actions()
 <$action-setfield $index="title" $value=<<plugin-title>>    />
 <$action-setfield $index="name"  $value={{{ [<plugin-title>get[name]] }}}   />
 <$action-setfield $index="description" $value={{{ [<plugin-title>get[description]] }}}    />
@@ -16,6 +13,14 @@
 <$action-setfield $index="parent-plugin" $value={{{[<plugin-title>get[parent-plugin]]}}}    />
 <$action-setfield $index="dependents" $value={{{[<plugin-title>get[dependents]]}}}    />
 <$action-setfield $index="plugin-type" $value={{{[<plugin-title>get[plugin-draft]]}}}    />
+<$action-setfield $index="packaged-by" $value=<<now "Gatha on DDth MMM YYYY, 0hh:0mm:0ss">> />
 <$action-navigate $to=<<currentTiddler>>/>
+\end
+
+
+<$button class="tc-btn-invisible">{{!!caption}}
+<$tiddler tiddler=<<plugin-tiddler-within "plugin.info">> >
+<<addInfo-actions>>
 </$tiddler>
 </$button>
+

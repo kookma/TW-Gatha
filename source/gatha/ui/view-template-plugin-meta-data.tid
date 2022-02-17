@@ -1,6 +1,6 @@
 created: 20220201135412536
 list-before: $:/core/ui/ViewTemplate/plugin
-modified: 20220209065038676
+modified: 20220217084505769
 tags: 
 title: $:/plugins/kookma/gatha/ui/view-template-plugin-meta-data
 type: text/vnd.tiddlywiki
@@ -62,17 +62,14 @@ type: text/vnd.tiddlywiki
     <td class="ga-plugin-info-element-name">
       $name$:
     </td>
-    <td class="ga-plugin-info-element-value">
-      <$vars infoTid={{{ [<currentTiddler>addsuffix[/plugin.info]] }}}
-        pluginTid=<<currentTiddler>> >
-        <$button class="tc-btn-invisible tc-tiddlylink" tooltip="create and update plugin.info"> update
-          <$action-setfield $tiddler=<<infoTid>> $index="title"    $value=<<pluginTid>> />
-          <$list filter="name description author version core-version source list dependents parent-plugin" variable=idx>
-            <$action-setfield $tiddler=<<infoTid>>  $index=<<idx>>    $value={{{[<pluginTid>get<idx>] }}}/>
-          </$list>
-					<$action-setfield $tiddler=<<infoTid>>  $index="plugin-type"    $value={{{[<pluginTid>get[plugin-draft]] }}}/>
-        </$button>
-      </$vars>
+    <td class="ga-plugin-info-element-value"><!-----changed----->
+      <$importvariables filter="[[$:/plugins/kookma/gatha/actions/add-plugin.info]]">
+        <$vars plugin-title=<<currentTiddler>> currentTiddler={{{ [<currentTiddler>addsuffix[/plugin.info]] }}}  >
+          <$button class="tc-btn-invisible tc-tiddlylink" tooltip="create and update plugin.info"> update
+            <<addInfo-actions>>
+          </$button>		
+        </$vars>			 
+      </$importvariables>      
     </td>
   </tr>
 \end

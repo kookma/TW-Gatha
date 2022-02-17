@@ -1,8 +1,8 @@
 caption: Hierarchical search
 created: 20220211064820107
-modified: 20220211140222017
+modified: 20220217112628341
 tags: $:/tags/Gatha/Search
-title: $:/plugins/kookma/gatha/extra/search-hierarchical
+title: $:/plugins/kookma/gatha/extra/search-by-hierarchy
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/macros/definition
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 </$list>
 \end
 
-\define add-hierarchical-list-Button()
+\define add-by-hierarchy-Button()
 <$wikify name=allTiddlers text="""<$macrocall $name=toc-list here={{{ [<tempTid>get[text]trim[]!search:title<lb>!search<rb>] }}}/>""" >
 <$list filter="[enlist<allTiddlers>has[title]limit[1]]" variable=null>
 <$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin">{{$:/core/images/clone-button}}
@@ -45,7 +45,7 @@ type: text/vnd.tiddlywiki
 Target plugin: {{!!target-plugin}}
 
 <$vars lb="[" rb="]">
-<$macrocall $name="add-bulk-extra-tiddlers" label="Root tag" placeholder="enter a root tag e.g Contents" addbutton=<<add-hierarchical-list-Button>> />
+<$macrocall $name="add-bulk-extra-tiddlers" label="Root tag" placeholder="enter a root tag e.g Contents" addbutton=<<add-by-hierarchy-Button>> />
 
 <$wikify name=allTiddlers text="""<$macrocall $name=toc-list here={{{ [<tempTid>get[text]trim[]!search:title<lb>!search<rb>] }}}/>""" >
 

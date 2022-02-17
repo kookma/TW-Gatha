@@ -1,8 +1,8 @@
 caption: Filter search
 created: 20220211064639323
-modified: 20220211134451633
+modified: 20220217162752990
 tags: $:/tags/Gatha/Search
-title: $:/plugins/kookma/gatha/extra/search-filter
+title: $:/plugins/kookma/gatha/extra/search-by-filter
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/extra/search-inputbox
@@ -20,6 +20,7 @@ Target plugin: {{!!target-plugin}}
 
 <$macrocall $name="add-bulk-extra-tiddlers" label="Search by filter" placeholder="enter a filter e.g [tag[doc]]" addbutton=<<add-by-filter-Button>> /> 
 
+<!-- show results -->
 <$vars resultFilter={{{ [<tempTid>get[text]] }}} >
 <small>//<$count filter="[subfilter<resultFilter>] :filter[has[title]]" /> matches//</small>
 

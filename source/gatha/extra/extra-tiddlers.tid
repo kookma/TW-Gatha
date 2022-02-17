@@ -1,7 +1,7 @@
 created: 20220203060016202
-modified: 20220211144421242
+modified: 20220217132040519
 tags: 
-title: $:/plugins/kookma/gatha/extra/tiddlers-tree
+title: $:/plugins/kookma/gatha/extra/extra-tiddlers
 type: text/vnd.tiddlywiki
 
 \whitespace trim
@@ -54,12 +54,13 @@ $button$
 </$button>
 \end
 
+<!--(1) show header with number of extra tiddlers and optional button for add bulk tiddlers-->
 <div class="ga-extra-label" title="drop tiddlers here">
 <$list filter="[<tidConfig>getindex[add-tiddlers]match[show]]" variable=null><<add-bulk-tiddler>> &nbsp; </$list>
-Extra tiddlers (<$count filter="[enlist{!!extra-tiddlers}]" />)
+<b>Extra tiddlers</b>&nbsp; (<$count filter="[enlist{!!extra-tiddlers}]" />)
 </div>
 
-<!-- draggable list of extra tiddlers -->
+<!--(2) draggable list of extra tiddlers -->
 <div class="tc-sidebar-tab-open" style="margin-left:14px;">
 <$vars gv-extra-list=<<currentTiddler>> >
 	

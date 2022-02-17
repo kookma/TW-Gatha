@@ -1,5 +1,5 @@
 created: 20220212162136459
-modified: 20220213191214482
+modified: 20220217134131497
 tags: show-content
 title: $:/plugins/kookma/gatha/export/json-template
 type: text/vnd.tiddlywiki
@@ -16,8 +16,9 @@ type: text/vnd.tiddlywiki
 <$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
 <$jsontiddler tiddler=<<currentTiddler>> 
  $plugin-type={{!!plugin-draft}}
+ $packaged-by=<<now "Gatha on DDth MMM YYYY, 0hh:0mm:0ss">>
  $text=<<pluginShadows>>
- exclude="plugin-draft extra-tiddlers"
+ exclude="plugin-draft extra-tiddlers resource-tiddlers"
  escapeUnsafeScriptChars="yes" />
 </$wikify>
 </$set>
