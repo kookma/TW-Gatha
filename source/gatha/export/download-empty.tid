@@ -1,6 +1,6 @@
 created: 20220212190254612
 hide-body: yes
-modified: 20220215061826676
+modified: 20220218102334056
 tags: show-content
 title: $:/plugins/kookma/gatha/export/download-empty
 type: text/vnd.tiddlywiki
@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 \define saveTiddlerFilter()
 [[$:/core]] [[$:/isEncrypted]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] [subfilter{$:/config/gatha/PublishFilter}] [subfilter{$:/config/$(publisherName)$/$(pluginName)$/PublishFilter}] +[sort[title]]
 \end
+
 \define savingEmpty()
 yes
 \end

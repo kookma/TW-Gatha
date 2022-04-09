@@ -1,5 +1,5 @@
 created: 20220203025826558
-modified: 20220217133439665
+modified: 20220219191848697
 tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/main
 type: text/vnd.tiddlywiki
@@ -63,4 +63,9 @@ type: text/vnd.tiddlywiki
 .ga-edit-publish{
   width:95%;
   margin-top:5px;
+}
+
+.ga-sidebar .tc-drop-down button:hover {
+	color: <<colour tiddler-link-background>>;
+	background-color: <<colour tiddler-link-foreground>>;
 }

@@ -1,7 +1,7 @@
 caption: Gatha
 created: 20220211122052524
 list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
-modified: 20220217162616828
+modified: 20220219150630263
 tags: $:/tags/ControlPanel/SettingsTab $:/tags/MoreSideBar
 title: $:/plugins/kookma/gatha/ui/ControlPanel/Settings
 type: text/vnd.tiddlywiki
@@ -22,6 +22,8 @@ type: text/vnd.tiddlywiki
 </$button>
 </$vars>
 \end
+
+<div class="ga-sidebar">
 
 These settings let you customise the behaviour of Gatha plugin.
 
@@ -48,3 +50,5 @@ These settings let you customise the behaviour of Gatha plugin.
 :<$checkbox tiddler=<<tidConfig>> index="load-plugin" checked="show" unchecked="hide" default="hide"> Show load-plugin button</$checkbox>
 :<$checkbox tiddler=<<tidConfig>> index="add-tiddlers" checked="show" unchecked="hide" default="hide"> Show add extra tiddlers button</$checkbox>
 :<$checkbox tiddler=<<tidConfig>> index="res-tiddlers" checked="show" unchecked="hide" default="hide"> Show resource tiddlers section</$checkbox>
+
+</div>

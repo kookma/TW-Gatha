@@ -1,5 +1,5 @@
 created: 20220215072303432
-modified: 20220217112303385
+modified: 20220219184106266
 tags: 
 title: $:/plugins/kookma/gatha/tabs/ide
 type: text/vnd.tiddlywiki
@@ -11,7 +11,6 @@ type: text/vnd.tiddlywiki
 <div class="ga-sidebar">
 
 <<create-new-plugin>><$list filter="[<tidConfig>getindex[load-plugin]match[show]]" variable=null> | <<load-plugin-ui>></$list>
-
 
 <!-- creats tabs from plugin drafts -->
 <$macrocall $name="tabs"
