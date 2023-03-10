@@ -1,7 +1,5 @@
 caption: Gatha
-created: 20220211122052524
 list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
-modified: 20220219150630263
 tags: $:/tags/ControlPanel/SettingsTab $:/tags/MoreSideBar
 title: $:/plugins/kookma/gatha/ui/ControlPanel/Settings
 type: text/vnd.tiddlywiki
