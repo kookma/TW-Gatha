@@ -1,23 +1,28 @@
-tags: 
+created: 20240913071900734
+modified: 20240913071900734
 title: $:/plugins/kookma/gatha/extra/search-inputbox
 type: text/vnd.tiddlywiki
 
-\define tempTid() $:/temp/gatha/add-bulk
+\function search-tempTid() [[$:/temp/gatha/add-bulk]]
 
-\define clear-action()
-<$action-setfield $tiddler=<<tempTid>> $field="text" $value=""/>
+\procedure clear-action()
+	<$action-deletetiddler $tiddler=<<search-tempTid>> />
 \end
+
 
 \define clearButton()
-<$list filter="[<tempTid>get[text]trim[]!is[blank]]" variable=null>
-<$button class="tc-btn-invisible" actions=<<clear-action>> >{{$:/core/images/close-button}}</$button>
-</$list>
+\whitespace trim
+<%if [<search-tempTid>get[text]trim[]!is[blank]] %>
+	<$button class="tc-btn-invisible" actions=<<clear-action>> >{{$:/core/images/close-button}}</$button>
+<%endif%>
 \end
 
-\define add-bulk-extra-tiddlers(label, placeholder:"", addbutton)
+
+\procedure add-bulk-tiddlers(label, placeholder:"", addbutton)
+\whitespace trim
 <div class="tc-search tc-advanced-search">
-<$keyboard actions=<<clear-action>> key="escape">
-$label$: <$edit-text tiddler=<<tempTid>> tag=input default="" placeholder="$placeholder$" focus={{$:/config/Search/AutoFocus}}/>
-</$keyboard> <<clearButton>> $addbutton$
+	<$keyboard actions=<<clear-action>> key="escape">
+	<$text text=<<label>> />:&nbsp; <$edit-text tiddler=<<search-tempTid>> tag=input default="" placeholder=<<placeholder>> focus={{$:/config/Search/AutoFocus}}/>
+	</$keyboard><<clearButton>><<addbutton>>
 </div>
 \end

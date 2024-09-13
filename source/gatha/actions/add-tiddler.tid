@@ -1,0 +1,12 @@
+caption: new tiddler
+tags: $:/tags/Gatha/Action
+title: $:/plugins/kookma/gatha/actions/add-tiddler
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/procedures/create-item
+<$transclude $variable=create-item
+  btncaption={{!!caption}}
+  title="new-tiddler"
+  template="$:/plugins/kookma/gatha/templates/tiddler"
+  tags=""
+/>

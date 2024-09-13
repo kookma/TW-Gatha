@@ -1,20 +1,11 @@
 caption: add boilerplate tiddlers
-list: readme license history
 tags: $:/tags/Gatha/Action
 title: $:/plugins/kookma/gatha/actions/add-boilerplate
 type: text/vnd.tiddlywiki
 
-\define plugin-tiddler-within(title) $(namePrefix)$$(__publisher__)$/$(__plugin-name__)$/$title$
-
-<$set name="old-list" tiddler=<<plugin-full-path>> field="list">
-<$set name="list" filter="[enlist<old-list>] -[[readme]] -[[license]] -[[history]]">
-<$set name="new-list" filter="readme license history [enlist<list>]">
 <$button class="tc-btn-invisible" >{{!!caption}}
-<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "history">> $param="$:/plugins/kookma/gatha/templates/boilerplate/history" />
-<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "license">> $param="$:/plugins/kookma/gatha/templates/boilerplate/license" />
-<$action-sendmessage $message="tm-new-tiddler" title=<<plugin-tiddler-within "readme">> $param="$:/plugins/kookma/gatha/templates/boilerplate/readme" />
-<$action-setfield $tiddler=<<plugin-full-path>> list=<<new-list>> />
+<$action-sendmessage $message="tm-new-tiddler" title={{{ [function[plugin-full-path]addsuffix[/readme]] }}} $param="$:/plugins/kookma/gatha/templates/boilerplate/readme" />
+<$action-sendmessage $message="tm-new-tiddler" title={{{ [function[plugin-full-path]addsuffix[/license]] }}} $param="$:/plugins/kookma/gatha/templates/boilerplate/license" />
+<$action-sendmessage $message="tm-new-tiddler" title={{{ [function[plugin-full-path]addsuffix[/history]] }}} $param="$:/plugins/kookma/gatha/templates/boilerplate/history" />
+<$action-listops $tiddler=<<plugin-full-path>> $subfilter="[prepend[readme license history]]" />
 </$button>
-</$set>
-</$set>
-</$set>

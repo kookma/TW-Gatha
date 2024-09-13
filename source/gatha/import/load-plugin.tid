@@ -1,11 +1,10 @@
-tags: 
 title: $:/plugins/kookma/gatha/import/load-plugin
 type: text/vnd.tiddlywiki
 
-\define loadTid() $:/temp/gatha/load
-\define excluded-plugins() $:/temp/info-plugin $:/core $:/plugins/kookma/gatha
+\function loadTid() [[$:/temp/gatha/load]]
+\function excluded-plugins() [[$:/temp/info-plugin]] [[$:/core]] [[$:/plugins/kookma/gatha]]
 
-\define load-actions()
+\procedure load-actions()
 <$tiddler tiddler={{{ [<loadTid>get[text]] }}} >
 <$action-confirm $message="Do you wish to load selected plugin into Gatha and convert it to a draft? This action cannot be undone!">
 <!--(1) load extra tiddlers and create plugin-draft ----->
@@ -27,31 +26,26 @@ type: text/vnd.tiddlywiki
 </$tiddler>
 <$action-deletetiddler $tiddler="$:/temp/popup/gatha/select-plugin"/> 
 <$action-deletetiddler $tiddler=<<loadTid>> /> 
-\end
+\end load-actions
 
-\define select-to-load()
-<$set name=plugins filter="[all[shadows+tiddlers]plugin-type[plugin]sort[name]] -[enlist<excluded-plugins>]" >
-Select plugin to modify <$select tiddler=<<loadTid>> default={{{ [enlist<plugins>first[]] }}} >
-<optgroup label='Plugins'>
-<$list filter="[enlist<plugins>]">
-<option value=<<currentTiddler>>><$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}} /></option>
-</$list>
-</optgroup>
-<optgroup label='Themes'>
-<$list filter="[all[shadows+tiddlers]plugin-type[theme]sort[name]]">
-<option value=<<currentTiddler>>><$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}} /></option>
-</$list>
-</optgroup>
-<optgroup label='Languages'>
-<$list filter="[all[shadows+tiddlers]plugin-type[language]sort[name]]">
-<option value=<<currentTiddler>>><$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}} /></option>
-</$list>
-</optgroup>
-</$select>
-</$set>
-\end
 
-\define load-plugin-ui()
+\procedure select-to-load()
+	\procedure display-group(label, filter)
+		<optgroup label=<<label>> >
+			<$list filter=<<filter>> >
+				<option value=<<currentTiddler>>><$text text={{{ [<currentTiddler>get[name]] :else[<currentTiddler>split[/]last[1]] ~[<currentTiddler>] }}} /></option>
+			</$list>
+		</optgroup>
+	\end display-group
+	Select plugin to modify <$select tiddler=<<loadTid>> default="select a plugin" >
+		<option value="select a plugin" disabled>select a plugin, theme, or language</option>
+		<<display-group label:"Plugins"   filter:"[all[shadows+tiddlers]plugin-type[plugin]sort[name]] -[function[excluded-plugins]]">>
+		<<display-group label:"Themes"    filter:"[all[shadows+tiddlers]plugin-type[theme]sort[name]]">>
+		<<display-group label:"Languages" filter:"[all[shadows+tiddlers]plugin-type[language]sort[name]]">>
+	</$select>
+\end select-to-load
+
+\procedure load-plugin-ui()
 <$button class="tc-btn-invisible" popup="$:/temp/popup/gatha/select-plugin" tooltip="load exisiting plugins to modify">{{$:/core/images/edit-button}}<span class="tc-btn-text">load plugin</span></$button>
 <$reveal type="popup" state="$:/temp/popup/gatha/select-plugin" class="tc-popup-keep">
 <div class="tc-drop-down">
@@ -66,4 +60,4 @@ Select plugin to modify <$select tiddler=<<loadTid>> default={{{ [enlist<plugins
 </$list>
 </div>
 </$reveal>
-\end
+\end load-plugin-ui

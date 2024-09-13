@@ -1,0 +1,23 @@
+code-body: yes
+description: inspired from $:/editions/tw5.com/download-empty
+title: $:/plugins/kookma/gatha/export/html-template
+type: text/vnd.tiddlywiki
+
+\procedure savingEmpty() yes
+
+
+\define saveTiddlerFilter()
+[[$:/core]] [[$:/isEncrypted]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] [subfilter{$:/config/gatha/PublishFilter}] [subfilter{$:/config/$(publisherName)$/$(pluginName)$/PublishFilter}] +[sort[title]]
+\end
+
+
+\procedure inject-packaged-plugin()
+`<script class="tiddlywiki-tiddler-store" type="application/json">[`
+<!--- JSON for plugin tiddler here -->
+{{||$:/plugins/kookma/gatha/export/json-template}}`]</script>`
+\end
+
+<!-- Create a custom html template with packaged plugin injected into the HTML file by prepending an additional <script> tag at the very start of the HTML file -->
+<<inject-packaged-plugin>>
+
+{{$:/core/templates/tiddlywiki5.html}}

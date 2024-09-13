@@ -2,31 +2,47 @@ tags: $:/tags/Stylesheet
 title: $:/plugins/kookma/gatha/styles/plugin-table
 type: text/vnd.tiddlywiki
 
-/* Newly added  */
 .ga-plugin-info{
 	width:100%;
 }
 .ga-plugin-edit-element-value input{
 	width:100%;
 }
+/* for gatha-thirdflow release table */
+.ga-plugin-edit-element-value input[type=checkbox]{
+	width:auto;
+}
+td.ga-plugin-edit-element-name{
+	text-align: right;
+	vertical-align: baseline;
+	width:8em;
+	min-width:4em;
+}
+/*-----------------------------------------*/
 td.ga-plugin-info-element-name{
 	width:14rem;
 }
 /* the plugin-type input */
-.ga-plugin-edit-element-value input[type=text].ga-plugin-edit-element-type {width:70%;}
+.ga-plugin-edit-element-value input[type=text],
+.ga-plugin-edit-element-value input[type=text].ga-plugin-edit-element-type,
+.ga-plugin-edit-element-value select {
+	height: 1.75em; 
+}
+.ga-plugin-edit-element-value input[type=text].ga-plugin-edit-element-type {
+	width:70%;	
+}
 .ga-plugin-edit-element-value select {
 	width: calc(30% - 8px);
-	border-width:2px;
+	border-width:2px;	
 }
 
-/*---from tfc---*/
 
+/*---from tfc---*/
 tr.ga-plugin-info-element td {
 	padding-top: 0.4ex;
 	padding-bottom: 0.4ex;
 	vertical-align: baseline;
 }
-
 td.ga-plugin-info-element-name {
 	text-align: right;
 	vertical-align: baseline;
@@ -34,22 +50,18 @@ td.ga-plugin-info-element-name {
 	background-color: <<colour table-header-background>>;
 	font-weight: bold;
 }
-
 td.ga-plugin-info-element-value {
 	text-align: left;
 	vertical-align: top;
 }
-
 span.ga-plugin-info-unspecified {
 	font-style: italic;
 	color: <<colour very-muted-foreground>>;
 }
-
 span.ga-plugin-info-unspecified:before {
 	font-style: normal;
 	content: "(";
 }
-
 span.ga-plugin-info-unspecified:after {
 	font-style: normal;
 	content: ")";

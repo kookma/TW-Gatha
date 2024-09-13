@@ -1,13 +1,16 @@
 {
     "title": "$:/plugins/kookma/gatha",
+    "version": "2.0.1",
+    "stability": "STABILITY_2_STABLE",
     "name": "Gatha Studio Workspace",
     "description": "Creating and distributing plugins, editions, contents in browser",
     "author": "Mohammad Rahmani",
-    "version": "1.0.3",
-    "core-version": ">=5.2.1",
     "source": "https://github.com/kookma/TW-Gatha",
     "list": "readme license history",
-    "plugin-type": "plugin",
+    "plugin-priority": "",
     "parent-plugin": "",
-    "dependents": "$:/plugins/tiddlywiki/jszip"
+    "dependents": "",
+    "plugin-type": "plugin",
+    "core-version": ">=5.3.5",
+    "packaged-by": "Gatha on 13th September 2024, 10:06:40"
 }

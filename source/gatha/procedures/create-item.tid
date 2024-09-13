@@ -1,0 +1,11 @@
+title: $:/plugins/kookma/gatha/procedures/create-item
+type: text/vnd.tiddlywiki
+
+\procedure create-item(btncaption:"new item", type, title, template, tags)
+<$let base-title= {{{  [<plugin-full-path>] [<type>] [<title>] :and[!is[blank]join[/]]  }}}
+      new-title=  {{{ "[<unusedtitle baseName:$(base-title)$>]" :and[substitute[]]      }}} >
+<$button class="tc-btn-invisible" ><$text text=<<btncaption>> />
+	<$action-sendmessage $message="tm-new-tiddler" title={{{ [subfilter<new-title>] }}} tags=<<tags>> $param=<<template>> />
+</$button>
+</$let>
+\end

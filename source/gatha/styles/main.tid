@@ -16,6 +16,17 @@ type: text/vnd.tiddlywiki
 	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
+/* when plugin release is disabled */
+.ga-sidebar button:disabled.tc-btn-invisible,
+.ga-sidebar button:disabled.tc-btn-invisible {
+	opacity:0.5;
+}
+.ga-sidebar button:disabled.tc-btn-invisible::after {
+    content: "release is disabled";
+    font-style:italic;
+}
+
+
 /*--------------- tc-tree for tree macro*/
 .ga-sidebar .tc-tree button {
 	color:<<colour sidebar-tiddler-link-foreground>>;
@@ -55,6 +66,12 @@ type: text/vnd.tiddlywiki
 }
 .tc-btn-invisible.ga-toggle-result:hover svg {
 	fill: <<colour sidebar-tiddler-link-foreground-hover>>;
+}
+
+/*--- adjust hr for Export button */
+.ga-hr{
+	margin-top:0.25rem;
+	margin-bottom:0.25rem;
 }
 
 /*ther ui elements */

@@ -1,0 +1,7 @@
+tags: 
+title: $:/plugins/kookma/gatha/templates/procedure
+type: text/vnd.tiddlywiki
+
+\procedure myproc()
+..
+\end myproc

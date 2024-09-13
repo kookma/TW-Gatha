@@ -1,0 +1,16 @@
+{
+    "title": "$:/plugins/kookma/gatha-thirdflow",
+    "version": "1.3.1",
+    "stability": "STABILITY_2_STABLE",
+    "name": "Gatha ThirdFlow",
+    "description": "A Gatha companion for plugin development under Node.JS",
+    "author": "TheDiveO, Mohammad Rahmani",
+    "source": "https://github.com/kookma/TW-Gatha",
+    "list": "readme license history",
+    "plugin-priority": "",
+    "parent-plugin": "$:/plugins/kookma/gatha",
+    "dependents": "$:/plugins/kookma/gatha",
+    "plugin-type": "plugin",
+    "core-version": ">=5.3.5",
+    "packaged-by": "Gatha on 12th September 2024, 19:32:39"
+}

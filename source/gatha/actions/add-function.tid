@@ -1,0 +1,13 @@
+caption: new function
+tags: $:/tags/Gatha/Action
+title: $:/plugins/kookma/gatha/actions/add-function
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/procedures/create-item
+<$transclude $variable=create-item
+  btncaption={{!!caption}}
+  type="functions"
+  title="new-function"
+  template="$:/plugins/kookma/gatha/templates/function"
+  tags="$:/tags/Global"
+/>

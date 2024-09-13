@@ -1,33 +1,39 @@
 caption: Filter search
+code-body: yes
+created: 20240913071609531
+modified: 20240913071840026
 tags: $:/tags/Gatha/Search
 title: $:/plugins/kookma/gatha/extra/search-by-filter
 type: text/vnd.tiddlywiki
 
 \import $:/plugins/kookma/gatha/extra/search-inputbox
 
-\define btn-actions()
-<$action-listops $tiddler={{!!target-plugin}} 
-  $field={{{[<modifier>match[ctrl]then[resource-tiddlers]else[extra-tiddlers]]}}} 
-  $subfilter={{{ [<tempTid>get[text]] }}} 
-/>
-\end
 
-\define add-by-filter-Button()
-<$list filter="[subfilter{$(tempTid)$}] :filter[has[title]]  +[limit[1]]" variable=null>
+\procedure btn-actions()
+<$set name=bulktids filter={{{ [<search-tempTid>get[text]] }}} >
+	<$action-listops $tiddler={{!!target-plugin}} 
+		$field={{{ [<modifier>match[ctrl]then[resource-tiddlers]else[extra-tiddlers]] }}} 
+		$subfilter="[subfilter<bulktids>]" />
+</$set>
+\end btn-actions
+
+\function resultFilter() [<search-tempTid>get[text]]
+
+\procedure add-by-filter-Button()
+\whitespace trim
+<%if [subfilter<resultFilter>has[title]] %>
 <$button class="tc-btn-invisible" tooltip="add bulk of tiddlers to target plugin" actions=<<btn-actions>> >
-{{$:/core/images/clone-button}}
+	{{$:/core/images/clone-button}}
 </$button>
-</$list>
-\end
+<%endif%>
+\end add-by-filter-Button
 
 
 Target plugin: {{!!target-plugin}}
 
-<$macrocall $name="add-bulk-extra-tiddlers" label="Search by filter" placeholder="enter a filter e.g [tag[doc]]" addbutton=<<add-by-filter-Button>> /> 
+<$transclude $variable="add-bulk-tiddlers" label="Search by filter" placeholder="enter a filter e.g [tag[doc]]" addbutton=<<add-by-filter-Button>> />
 
 <!-- show results -->
-<$vars resultFilter={{{ [<tempTid>get[text]] }}} >
-<small>//<$count filter="[subfilter<resultFilter>] :filter[has[title]]" /> matches//</small>
+<small>//<$count filter="[subfilter<resultFilter>has[title]]" /> matches//</small>
 
-<$list filter="[subfilter<resultFilter>] :filter[has[title]]" template="$:/core/ui/ListItemTemplate"/>
-</$vars>
+<$list filter="[subfilter<resultFilter>has[title]]" template="$:/core/ui/ListItemTemplate"/>

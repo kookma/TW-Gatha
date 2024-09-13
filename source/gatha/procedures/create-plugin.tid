@@ -1,0 +1,12 @@
+title: $:/plugins/kookma/gatha/procedures/create-plugin
+type: text/vnd.tiddlywiki
+
+\procedure create-new-plugin()
+  <$button tooltip="create new plugin" class="tc-btn-invisible" actions=<<create-plugin-actions>> >
+    {{$:/core/images/new-button}}<span class="tc-btn-text">new plugin</span>   
+  </$button>
+\end create-new-plugin
+
+\procedure create-plugin-actions()
+<$action-sendmessage $message="tm-new-tiddler" title="$:/plugins/PublisherName/PluginName" plugin-draft="plugin" stability="STABILITY_1_EXPERIMENTAL" type="application/json" release="yes" template=""/>
+\end

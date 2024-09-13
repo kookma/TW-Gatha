@@ -1,19 +1,18 @@
 caption: export zip file
-hide-body: yes
+code-body: yes
 tags: $:/tags/Gatha/ExportButton
 title: $:/plugins/kookma/gatha/export/export-btn-plugin-zipped
 type: text/vnd.tiddlywiki
 
-\whitespace trim
 \define plugin-exported-zip-filename() $(pluginType)$_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.zip
 
-\define tempZipTiddler()  $:/temp/gatha/_ZipTiddler
-\define delete-temp-action() <$action-deletetiddler $tiddler=<<tempZipTiddler>> />
+\procedure tempZipTiddler()  $:/temp/gatha/_ZipTiddler
+\procedure delete-temp-action() <$action-deletetiddler $tiddler=<<tempZipTiddler>> />
 
-\define renderContent()
+\procedure renderContent()
   <$action-sendmessage $message="tm-zip-create" $param=<<tempZipTiddler>>/>
-	<!-- add tiddlers under plugin namespace -->
-  <$list filter="[prefix<currentTiddler>] -[<currentTiddler>] -[[$(currentTiddler)$/plugin.info]]" > <!-- currentTiddler refers to plugin fullname here -->
+	<!-- add tiddlers under plugin namespace, except the plugin.info -->
+  <$list filter="[prefix<currentTiddler>!suffix[plugin.info]] -[<currentTiddler>]" > <!-- currentTiddler refers to plugin fullname here -->
     <$action-sendmessage 
 		  $message="tm-zip-render-file" 
 		  $param=<<tempZipTiddler>>
@@ -23,24 +22,24 @@ type: text/vnd.tiddlywiki
     />
   </$list>
 	<!-- add plugin.info if exist -->
-  <$list filter="[[$(currentTiddler)$/plugin.info]has[title]]" variable=plugininfoTiddler>
+  <$list filter="[<currentTiddler>addsuffix[/plugin.info]has[title]]" variable=plugininfoTiddler>
 	  <$action-sendmessage $message="tm-zip-add-text-file"
       $param=<<tempZipTiddler>>
-      filename={{{[[plugin.info]addprefix[$(publisherName)$/$(pluginName)$/]]}}}
+      filename={{{ [<publisherName>][<pluginName>][[plugin.info]] :and[join[/]] }}}
       text={{{ [<plugininfoTiddler>get[text]] }}}
     />
   </$list>
 		
 	<!-- add extra tiddlers which do not follow the plugin namespace -->
-  <$list filter="[enlist{!!extra-tiddlers}] :filter[has[title]]" > <!-- currentTiddler refers to plugin fullname here -->
-    <$action-sendmessage 
-		  $message="tm-zip-render-file" 
-		  $param=<<tempZipTiddler>>
-			filename={{{ [<currentTiddler>search-replace:g[$:],[system]] +[split[/]slugify[]join[/]addsuffix[.tid]addprefix[$(publisherName)$/$(pluginName)$/extra/]] }}} 
+	<$list filter="[enlist{!!extra-tiddlers}] :filter[has[title]]" > <!-- currentTiddler refers to plugin fullname here -->
+		<$action-sendmessage 
+			$message="tm-zip-render-file" 
+			$param=<<tempZipTiddler>>
+			filename={{{ [<publisherName>][<pluginName>][[extra]][<currentTiddler>search-replace:g[$:],[system]split[/]slugify[]join[/]addsuffix[.tid]] :and[join[/]] }}} 
 			tiddler=<<currentTiddler>> 
 			template="$:/core/templates/tid-tiddler"
-    />
-  </$list>	
+		/>
+	</$list>	
 	
 	
 	<!-- export zip file for download -->
@@ -48,8 +47,9 @@ type: text/vnd.tiddlywiki
 \end
 
 
-\define export-zipped-plugin()
-<$button actions=<<delete-temp-action>> class="tc-btn-invisible" tooltip="export plugin folder to be used with Tiddlywiki on Node.js">
+\procedure export-zipped-plugin()
+\function isdisabled() [<plugin-full-path>get[release]!match[yes]then[yes]]
+<$button actions=<<delete-temp-action>> class="tc-btn-invisible" tooltip="export plugin folder to be used with Tiddlywiki on Node.js" disabled=<<isdisabled>>>
   {{$:/core/images/storyview-classic}}<span class="tc-btn-text">plugin folder (zip file)</span>
   <<renderContent>>
 </$button>

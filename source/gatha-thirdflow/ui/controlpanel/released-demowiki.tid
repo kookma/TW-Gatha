@@ -1,0 +1,25 @@
+caption: Released Demowiki
+tags: $:/tags/Gatha/Settings $:/tags/Commander/Working
+title: $:/plugins/kookma/gatha-thirdflow/ui/controlpanel/released-demowiki
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha-thirdflow/ui/procedures
+
+Settings to customize //your// plugin, theme, and package development using //Gatha-Thirdflow// when work under Node.js.<br>
+Customize your ''plugin(s) release'', and ''demo wiki'' release.
+
+---
+
+''Select plugin for release''
+
+These are plugins under development. Enable plugins for resale will pack them into the released Demowiki. The enabled plugins for release, will also be exported as separated packaged plugin (as .tid, or .json).
+
+<$transclude $variable="create-table" inputFilter="[has[plugin-draft]!is[draft]]" templateTag="$:/tags/Gatha/Templates/PublishTiddler" />
+
+---
+
+''Release Demowiki''
+
+Create a demonstration TiddlyWiki with selected plugins packaged into it. To pack additional tiddlers into your demo wiki during release phase, specify filter expression in the global [[PublishFilter|$:/config/gatha/PublishFilter]] (see General Settings).
+
+<$transclude $variable="create-table" inputFilter="[[$:/config/gatha/DemoWiki]]" templateTag="$:/tags/Gatha/Templates/PublishDemo"/>

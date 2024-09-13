@@ -1,0 +1,8 @@
+title: $:/plugins/kookma/gatha-thirdflow/history
+type: text/vnd.tiddlywiki
+
+Full change log  https://kookma.github.io/TW-Gatha/gatha-thirdflow.html#ChangeLog
+
+* ''1.3.1'' -- 2024.09.12 -- moved to the new gatha-thirdflow
+* ''1.3.0''  -- 2024.08.22 -- striped out to minimum features (thirdflow.js, realseplugins.js, releasedemowiki.js)
+* ''1.2.11'' -- 2020.12.10 -- forked from TheODive ThirdFlow

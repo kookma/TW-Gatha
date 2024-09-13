@@ -1,0 +1,35 @@
+tags: $:/tags/Commander/Working
+title: $:/plugins/kookma/gatha-thirdflow/ui/procedures
+type: text/vnd.tiddlywiki
+
+\procedure select-template(targetTiddler, templateTag)
+<$select tiddler=<<targetTiddler>> field="template" default="">
+	<$list filter="[all[tiddlers+shadows]tag<templateTag>]">
+		<option value=<<currentTiddler>> ><$text text={{{ [{!!caption}lowercase[]] }}}/></option>
+	</$list>
+</$select>
+\end select-template
+
+\procedure create-table(inputFilter, templateTag)
+<div class="tc-edit-fields">
+  <table class="tc-edit-fields">
+    <tbody>
+		<$list filter=<<inputFilter>> >
+		<tr class="tc-edit-field">
+      <td class="ga-plugin-edit-element-name">release:</td>
+      <td class="ga-plugin-edit-element-value" style="white-space: nowrap;">
+				<$checkbox field="release" checked="yes" unchecked="no" /> <$link/>
+      </td>
+    </tr>
+    <tr class="tc-edit-field">
+      <td class="ga-plugin-edit-element-name">template:</td>
+      <td class="ga-plugin-edit-element-value" style="white-space: nowrap;">
+				<$edit-text tiddler=<<targetTiddler>> field="template" default="" placeholder="" tag="input" class="ga-plugin-edit-element-type" />
+				<$transclude $variable="select-template" targetTiddler=<<currentTiddler>> templateTag=<<templateTag>> $mode=inline/>
+      </td>
+    </tr>
+		</$list>
+		</tbody>
+	</table>	
+</div>
+\end create-table

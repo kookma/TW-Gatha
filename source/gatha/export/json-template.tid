@@ -1,22 +1,22 @@
+code-body: yes
 tags: show-content
 title: $:/plugins/kookma/gatha/export/json-template
 type: text/vnd.tiddlywiki
 
-\define plugin-shadow-tiddlers()
-{"tiddlers": {<$list filter="[subfilter<exportFilter>]+[bl[]]">
-"{{{ [<currentTiddler>] +[jsonstringify[]] }}}": <$text text=<<jsontiddler>>/>,
-</$list><$list filter="[subfilter<exportFilter>]+[last[]]">
-"{{{ [<currentTiddler>] +[jsonstringify[]] }}}": <$text text=<<jsontiddler>>/></$list>}
+\procedure plugin-shadow-tiddlers()
+{"tiddlers": {<$list filter="[subfilter<exportFilter>]" join=",">
+"{{{ [<currentTiddler>] +[jsonstringify[]] }}}": <$text text=<<jsontiddler>>/>
+</$list>}
 }
 \end
 
-<$set name=exportFilter filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
+<$set name=exportFilter filter="[prefix<currentTiddler>!suffix[plugin.info]] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]">
 <$wikify name=pluginShadows text=<<plugin-shadow-tiddlers>> >
 <$jsontiddler tiddler=<<currentTiddler>> 
  $plugin-type={{!!plugin-draft}}
  $packaged-by=<<now "Gatha on DDth MMM YYYY, 0hh:0mm:0ss">>
  $text=<<pluginShadows>>
- exclude="plugin-draft extra-tiddlers resource-tiddlers"
+ exclude="plugin-draft extra-tiddlers resource-tiddlers release template"
  escapeUnsafeScriptChars="yes" />
 </$wikify>
 </$set>

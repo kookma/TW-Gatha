@@ -1,0 +1,39 @@
+code-body: yes
+tags: $:/tags/Commander/Working
+title: $:/plugins/kookma/gatha-thirdflow/templates/utility-functions
+type: text/vnd.tiddlywiki
+
+<!-- Aug 21, 2024
+This tiddler contains utility functions to be used by save templates e.g save-empty.
+It generates the list of draft plugins, config tiddlers of draft plugins
+generated during release.
+The functions also retrives the shadow tiddlers (prefixed by plugin title,
+or stored in extra-plugin tiddlers).
+Finally the global and local publish filters are retrived.
+-->
+
+
+\function configPrefix() [[$:/config/gatha/release/]]
+
+\function pluinsDisabledReleaseConfig() [prefix<configPrefix>has[plugin-draft]!release[yes]]
+\function pluinsEnabledReleaseConfig()  [prefix<configPrefix>has[plugin-draft]release[yes]]
+
+\function pluginsDisabledRelease() [function[pluinsDisabledReleaseConfig]removeprefix<configPrefix>]
+\function pluginsEnabledRelease()  [function[pluinsEnabledReleaseConfig]removeprefix<configPrefix>]
+
+
+<!--This function collects all tiddlers listed in plugin PublishFilter-->
+\function pluginsPublishFilter()
+    [function[pluginsEnabledRelease]]
+    :map[split[/]butfirst[2]join[/]addprefix[$:/config/]addsuffix[/PublishFilter]get[text]]
+\end pluginsPublishFilter
+
+<!--These are tiddlers manually added to released demo through local and global publish filters -->
+\function localPublishFilter()  [function[pluginsPublishFilter]] :and[join[ ]]
+\function globalPublishFilter() [subfilter{$:/config/gatha/PublishFilter}]
+
+
+<!-- These are plugins shadow tiddlers and should be excluded from released demo -->
+\function pluginShadowExtra() [function[pluinsEnabledReleaseConfig]] :map:flat[enlist{!!extra-tiddlers}]
+\function pluginShadows()     [function[pluginsEnabledRelease]] :map:flat[all[tiddlers]prefix<currentTiddler>] -[function[pluginsEnabledRelease]]
+\function shadowInSync()      [function[pluginShadows]] [function[pluginShadowExtra]]

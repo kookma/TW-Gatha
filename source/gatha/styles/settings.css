@@ -1,0 +1,15 @@
+/*details html5 macro*/
+details.ga-details > summary {
+	padding: 2px 0px;
+	font-weight:500;
+	outline:none;
+}
+
+details.ga-details summary {
+	cursor: pointer;
+}
+
+.tc-btn-invisible.ga-field-toggle .tc-image-fa-toggle-on,
+.tc-btn-invisible.ga-field-toggle .tc-image-fa-toggle-off {
+	font-size: 1.4em;
+}

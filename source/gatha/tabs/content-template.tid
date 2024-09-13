@@ -1,71 +1,76 @@
-hide-body: yes
-tags: 
+code-body: yes
 title: $:/plugins/kookma/gatha/tabs/content-template
 type: text/vnd.tiddlywiki
 
-\whitespace trim
-\define plugin-full-path() $(namePrefix)$$(publisherName)$/$(pluginName)$
+\import $:/plugins/kookma/gatha/procedures/definition
+\import $:/plugins/kookma/gatha/extra/common-procedures
 
-\define disp-export-buttons()
-<!-- export buttons -->
-<div style="margin-top:10px;">
-''Export plugin''<br><hr>
-<$list filter="[prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]] +[limit[1]]" variable=null emptyMessage="There is nothing to export!">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Gatha/ExportButton]!has[draft.of]sort[caption]]" variable=button>
-<div class="tc-menu-list-item" style="padding-left:14px;">
-<$transclude tiddler=<<button>> mode="inline"/>
-</div>
-</$list>
-</$list>
+\whitespace trim
+\function plugin-full-path() [<namePrefix>] [<publisherName>] [<pluginName>] :and[join[/]]
+\function plugin-tiddlers() [prefix<currentTiddler>] -[<currentTiddler>] [enlist{!!extra-tiddlers}] :filter[has[title]]
+
+\procedure disp-export-buttons()
+<div style="margin-top:10px;"><!-- export buttons -->
+	''Export plugin''
+	<hr class="ga-hr">
+	<%if [function[plugin-tiddlers]limit[1]]  %><!-- show if the plugin has at least one shadow -->
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Gatha/ExportButton]!has[draft.of]sort[caption]]" variable=button>
+			<div class="tc-menu-list-item" style="padding-left:14px;">
+				<$transclude tiddler=<<button>> mode="inline"/>
+			</div>
+		</$list>
+	<%else%>
+		<span>There is nothing to export, or plugin release is disabled!</span>
+	<%endif%>
 </div>
 \end
 
 
-\define disp-plugin-tree(plugin-name, publisher)
+\procedure disp-plugin-tree()
 <!-- plugin actions -->
-<$set name="qp" value={{{ [<plugin-full-path>addprefix[$:/state/popup/actions/]] >}}} >
+<$let qp={{{ [<plugin-full-path>addprefix[$:/state/popup/actions/]] >}}} >
 <$button popup=<<qp>> class="tc-btn-invisible" selectedClass="tc-selected">
 {{$:/core/images/down-arrow}}
 </$button>
 <$reveal state=<<qp>> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Gatha/Action]!has[draft.of]sort[caption]]">
-<$transclude mode="inline"/>
+<$transclude $mode="inline"/>
 </$list>
 </div>
 </$reveal>
-</$set>
+</$let>
 <!-- plugin author/name w. link -->
 <$link to=<<plugin-full-path>> />
 &nbsp;(<$count filter="[all[tiddlers+shadows]prefix<plugin-full-path>] -[<plugin-full-path>]" />)
 
 <!-- list of plugin contents -->
 <div class="tc-tree" style="padding:6px 6px 6px 12px;">
-  <$macrocall $name="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
+  <$transclude $variable="tree-node" prefix={{{ [<plugin-full-path>addsuffix[/]] }}} />
 </div>
-\end
+\end disp-plugin-tree
 
 
 <$tiddler tiddler=<<currentTab>>>
 <$let 
  pluginType    = {{!!plugin-draft}}
- namePrefix    = {{{ [<pluginType>addprefix[$:/]addsuffix[s/]] }}}
+ namePrefix    = {{{ "$:/" [<pluginType>addsuffix[s]] :and[join[]]  }}}
  pluginName    = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]last[1]]  }}}
- publisherName = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]first[1]] }}}
+ publisherName = {{{ [<currentTiddler>removeprefix<namePrefix>split[/]!is[blank]first[1]] }}}
  pluginVersion = {{{ [<currentTiddler>get[version]else[0.0.0]] }}}
  timedate      = <<now "YYYY0MM0DD">>
 > 
 
 <!--- create the tab content for one plugin-draft --->
-<$macrocall $name=disp-plugin-tree plugin-name=<<pluginName>> publisher=<<publisherName>> />
+<$transclude $variable=disp-plugin-tree  />
 <!-- extra plugin tiddlers section -->
 {{||$:/plugins/kookma/gatha/extra/extra-tiddlers}}
 
-<!-- test and debug section -->
+<!-- resource tiddlers section -->
 {{||$:/plugins/kookma/gatha/extra/resource-tiddlers}}
 
 <!-- export button -->
-<$macrocall $name=disp-export-buttons />
+<$transclude $variable=disp-export-buttons />
 
 </$let>
 </$tiddler>

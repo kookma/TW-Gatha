@@ -1,0 +1,10 @@
+[
+    {
+        "title": "$:/plugins/kookma/gatha/actions/add-plugin.info",
+        "text": "\\function get-field(fname) [<plugin-full-path>get<fname>]\n\\define addInfo-actions()\n<$action-setfield $index=\"title\"       $value=<<plugin-full-path>>    />\n<$action-setfield $index=\"version\"     $value=<<get-field version>>   />\n<$action-setfield $index=\"stability\"   $value=<<get-field stability>> />\n<$action-setfield $index=\"name\"        $value=<<get-field name>>      />\n<$action-setfield $index=\"description\" $value=<<get-field description>> />\n<$action-setfield $index=\"author\"      $value=<<get-field author>>      />\n<$action-setfield $index=\"source\"      $value=<<get-field source>>      />\n<$action-setfield $index=\"list\"        $value=<<get-field list>>        />\n\n<$action-setfield $index=\"plugin-priority\" $value=<<get-field plugin-priority>> />\n<$action-setfield $index=\"parent-plugin\"   $value=<<get-field parent-plugin>>   />\n<$action-setfield $index=\"dependents\"      $value=<<get-field dependents>>      />\n<$action-setfield $index=\"plugin-type\"     $value=<<get-field plugin-draft>>    />\n<$action-setfield $index=\"core-version\"    $value={{{ [<plugin-full-path>get[core-version]] ~[<version>]}}} />\n<$action-setfield $index=\"packaged-by\"     $value=<<now \"Gatha on DDth MMM YYYY, 0hh:0mm:0ss\">>             />\n\\end\n\n\n<$button class=\"tc-btn-invisible\">{{!!caption}}\n<$tiddler tiddler={{{ [<plugin-full-path>] [[plugin.info]] :and[join[/]] }}} >\n<<addInfo-actions>>\n<$action-navigate $to=<<currentTiddler>>/><!-- open the plugin.info file -->\n</$tiddler>\n</$button>\n\n",
+        "type": "text/vnd.tiddlywiki",
+        "tags": "$:/tags/Gatha/Action",
+        "caption": "add plugin.info (for node.js)",
+        "code-body": "yes"
+    }
+]

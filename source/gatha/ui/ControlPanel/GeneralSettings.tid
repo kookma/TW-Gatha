@@ -1,0 +1,76 @@
+caption: {{{ [<button-caption>match[insideControlPanel]then[General Settings]else[Gatha]] }}}
+list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
+tags: $:/tags/Gatha/Settings $:/tags/MoreSideBar
+title: $:/plugins/kookma/gatha/ui/ControlPanel/GeneralSettings
+type: text/vnd.tiddlywiki
+
+\import $:/plugins/kookma/gatha/procedures/definition
+\procedure tidToggleVisibility() $:/temp/gatha/fields-visibility
+
+
+\function hiddenFields()
+author core-version dependents description extra-tiddlers
+name plugin-priority plugin-type parent-plugin plugin-draft
+release resource-tiddlers source stability template version
+\end
+
+\procedure toggle-plugin-fields-visibility()
+\function btn-svg() [<tidToggleVisibility>get[text]] :map[match[hide]then[on]]:else[[off]]:and[addprefix[$:/plugins/kookma/gatha/images/toggle-]]
+<$let status={{{[<tidToggleVisibility>get[text]] :map[match[hide]then[show]] :else[[hide]] }}} >
+<$button class="tc-btn-invisible ga-field-toggle" tooltip="hide/show plugin fields in edit mode">
+<$transclude $tiddler=<<btn-svg>> $mode=inline/><span class="tc-btn-text">toggle fileds visibility</span>
+<$list filter="[function[hiddenFields]sort[title]addprefix[$:/config/EditTemplateFields/Visibility/]]">
+<$action-setfield $field=text $value=<<status>> />
+</$list>
+<$action-listops $tiddler=<<tidToggleVisibility>> $field="text" $subfilter="+[toggle[hide]]" />
+</$button>
+</$let>
+\end
+
+<!-- used if and only if $:/plugins/kookma/gatha-thirdflow is installed -->
+\procedure open-released-demowiki-tab()
+<%if [[$:/plugins/kookma/gatha-thirdflow]!is[missing]] :filter[lookup:no[$:/config/Plugins/Disabled/]match[no]] %>
+For released demo settings under Node.js, see: <$button tooltip="show Release tab in Control Panel" class="tc-btn-invisible tc-tiddlylink" >
+  <$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
+  <$action-setfield $tiddler="$:/state/tab--697582678" text="$:/plugins/kookma/gatha/ui/ControlPanel/Settings"/>
+  <$action-setfield $tiddler="$:/state/tab/gatha/settings" text="$:/plugins/kookma/gatha-thirdflow/ui/controlpanel/released-demowiki"/>
+	<$action-navigate $to="$:/ControlPanel" $scroll="yes"/>
+  {{$:/core/images/options-button}} Released Demowiki
+</$button>
+<%endif%>
+\end open-released-demowiki-tab
+
+<div class="ga-sidebar">
+
+These settings let you customise the behaviour of Gatha plugin.<br>
+<<open-released-demowiki-tab>>
+
+---
+
+;Show Gatha setting in more sidebar
+:<$checkbox tiddler="$:/plugins/kookma/gatha/ui/ControlPanel/GeneralSettings" tag="$:/tags/MoreSideBar"> Show setting in more sidebar</$checkbox>
+
+; Hide Gatha in sidebar
+:<$checkbox tiddler="$:/plugins/kookma/gatha/ui/sidebar" tag="$:/tags/SideBar"> Disable Gatha development interface</$checkbox>
+
+<details class="ga-details">
+	<summary>''Hide plugin fields''</summary>
+	<dl>
+		<dt style="margin-left:25px;margin-bottom:5px;"><<toggle-plugin-fields-visibility>></dt>
+		<$list filter="[function[hiddenFields]sort[title]addprefix[$:/config/EditTemplateFields/Visibility/]]">
+			<dd><$checkbox tiddler=<<currentTiddler>> field=text checked="hide" unchecked="show" default="show"> <$link/></$checkbox></dd>
+		</$list>
+	</dl>
+</details>
+
+
+;Global publish filter ($:/config/gatha/PublishFilter)
+:<$edit-text tiddler="$:/config/gatha/PublishFilter" field=text class="tc-edit-texteditor tc-edit-texteditor-body ga-edit-publish" placeholder="filter exprestion to select tiddlers to be published with released demo e.g [tag[doc]]" default=""/>
+
+
+;Advanced ptions
+:<$checkbox tiddler=<<tidConfig>> index="load-plugin" checked="show" unchecked="hide" default="hide"> Show load-plugin button</$checkbox>
+:<$checkbox tiddler=<<tidConfig>> index="add-extra-tiddlers" checked="show" unchecked="hide" default="hide"> Show extra tiddlers section</$checkbox>
+:<$checkbox tiddler=<<tidConfig>> index="add-resource-tiddlers" checked="show" unchecked="hide" default="hide"> Show resource tiddlers section</$checkbox>
+
+</div>

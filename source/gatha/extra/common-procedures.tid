@@ -1,0 +1,72 @@
+code-body: yes
+created: 20240913071215373
+modified: 20240913071215373
+tags: 
+title: $:/plugins/kookma/gatha/extra/common-procedures
+type: text/vnd.tiddlywiki
+
+\function tid-addExtraTiddlers-ui() [[Gatha Add Bulk of Extra Tiddlers]]
+\function extra-or-resource-tiddlers-count() [<gv-target-plugin>get<target-field>enlist-input[]count[]]
+
+\procedure remove-all()
+<%if [<extra-or-resource-tiddlers-count>!match[0]] %>
+	<$button class="tc-btn-invisible tc-btn-mini" tooltip="remove all extra tiddlers" >remove all
+		<$action-confirm $message=`Do you wish to remove all ($(extra-or-resource-tiddlers-count)$) $(target-field)$?`>
+			<$action-setfield $tiddler=<<gv-target-plugin>> $field=<<target-field>> />
+		</$action-confirm>
+	</$button>
+<%else%>
+	<$text text="drop tiddlers here"/>
+<%endif%>
+\end remove-all
+
+
+\procedure remove-tiddler-from-list()
+\procedure remove-actions() <$action-listops $tiddler=<<gv-target-plugin>> $field=<<target-field>> $subfilter="-[<currentTiddler>]"/>
+<$button 
+   tooltip="remove tiddler" aria-label="remove tiddler" 
+   class="tc-btn-invisible tc-btn-mini tc-small-gap-right"
+   actions=<<remove-actions>> >
+   {{$:/core/images/close-button}}
+</$button>
+<$link/>
+\end remove-tiddler-from-list
+
+
+\procedure drop-actions()
+<%if [<actionTiddler>!prefix<gv-target-plugin>] :filter[has[title]] %> <!-- donot allow to drop tiddlers from the same plugin -->
+	<$action-listops $tiddler=<<gv-target-plugin>> $field=<<target-field>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+<%endif%>
+\end drop-actions
+
+
+
+\procedure placeholder()
+	<div class="tc-droppable-placeholder"/>
+\end
+
+
+\procedure droppable-item(button)
+\whitespace trim
+	<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>
+		<<placeholder>>
+		<div>
+			<$transclude $variable="button"/>
+		</div>
+	</$droppable>
+\end droppable-item
+
+
+\procedure add-bulk-tiddler()
+<$button to=<<tid-addExtraTiddlers-ui>> class="tc-btn-invisible ga-extra-button" tooltip="add bulk of tiddlers"> {{$:/core/images/clone-button}}
+	<$action-setfield $tiddler=<<tid-addExtraTiddlers-ui>> $field="target-plugin" $value=<<currentTiddler>> />
+</$button>
+\end add-bulk-tiddler
+
+
+<!-- This tiddler contains common procedures used in both of
+* $:/plugins/kookma/gatha/extra/extra-tiddlers
+* $:/plugins/kookma/gatha/extra/resource-tiddlers
+
+The two tiddlers create UI for adding tiddlers as "Extra tiddlers" and "Resource Tiddlers" to the plugin
+-->

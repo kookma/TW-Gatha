@@ -1,0 +1,11 @@
+tags: 
+title: $:/plugins/kookma/gatha/procedures/show-gatha-setting
+type: text/vnd.tiddlywiki
+
+\procedure navigate-to-gatha-setting()
+<$button class="tc-btn-invisible" > {{$:/core/images/options-button}} general settings
+  <$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
+  <$action-setfield $tiddler="$:/state/tab--697582678" text="$:/plugins/kookma/gatha/ui/ControlPanel/Settings"/>
+	<$action-navigate $to="$:/ControlPanel" $scroll="yes"/>
+</$button>
+\end

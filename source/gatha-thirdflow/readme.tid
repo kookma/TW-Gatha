@@ -1,0 +1,19 @@
+title: $:/plugins/kookma/gatha-thirdflow/readme
+type: text/vnd.tiddlywiki
+
+; Gatha Thirdflow
+Use the the Stripped Down ThirdFlow plugin in your Node.JS based TiddlyWikis to develop your plugins and packages inside browser using Gatha.
+
+;Code and demo
+For learning plugin features, syntax, tutorial and examples see the plugin demo and code pages
+
+* Demo: https://kookma.github.io/TW-Gatha/gatha-thirdflow.html
+* Code: https://github.com/kookma/TW-Gatha
+
+
+; Original ThirFlow
+
+The //Third Flow// plugin supports your plugin development in that it organizes all your tiddler source files into a clear hierarchical folder structure based on tiddler titles.
+An additional plugin creation command module makes it easy to create the package plugin itself as well as a demonstration TiddlyWiki without the hassle of having to maintain
+separate and even multiple ``tiddlers/`` and ``plugin/`` folders. Also, the //Third Flow// relieves you from shuffling tiddler source code files around in your source code repository.
+For more information, please go to the [[Third Flow project website|http://thediveo.github.io/ThirdFlow]].

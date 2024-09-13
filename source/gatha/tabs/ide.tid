@@ -1,21 +1,22 @@
-tags: 
 title: $:/plugins/kookma/gatha/tabs/ide
 type: text/vnd.tiddlywiki
 
-\import $:/plugins/kookma/gatha/macros/create-plugin
+\import $:/plugins/kookma/gatha/procedures/definition
+\import $:/plugins/kookma/gatha/procedures/create-plugin
 \import $:/plugins/kookma/gatha/import/load-plugin
-\import $:/plugins/kookma/gatha/macros/definition
+\import $:/plugins/kookma/gatha/procedures/show-gatha-setting
 
 <div class="ga-sidebar">
 
-<<create-new-plugin>><$list filter="[<tidConfig>getindex[load-plugin]match[show]]" variable=null> | <<load-plugin-ui>></$list>
+<<create-new-plugin>><$list filter="[<tidConfig>getindex[load-plugin]match[show]]" variable=null> | <<load-plugin-ui>></$list> | <<navigate-to-gatha-setting>>
 
 <!-- creats tabs from plugin drafts -->
-<$macrocall $name="tabs"
- tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]] :sort[split[/]!is[blank]nth[4]]" 
+<$transclude $variable="tabs"
+ tabsList=  "[all[tiddlers]has:field[plugin-draft]!has[draft.of]] :sort[split[/]!is[blank]last[]]" 
  default=   {{{ [all[tiddlers]has:field[plugin-draft]first[]] }}}
  buttonTemplate="$:/plugins/kookma/gatha/tabs/button-template"
  template="$:/plugins/kookma/gatha/tabs/content-template"
+ explicitState="$:/state/tabs/gatha/ide"
  class="tc-vertical"
  />
  </div>

@@ -1,9 +1,9 @@
-tags: 
 title: $:/plugins/kookma/gatha/history
 type: text/vnd.tiddlywiki
 
 Full change log  https://kookma.github.io/TW-Gatha/#ChangeLog
 
+* ''1.1.0'' -- 2024.08.10 -- rewritten from scratch for TW 5.3.5
 * ''1.0.0'' -- 2022.02.25 -- stable release
 * ''0.9.5'' -- 2022.02.19 -- stable release candidate
 * ''0.8.1'' -- 2022.02.11 -- ui for add extra tiddlers

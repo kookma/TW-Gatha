@@ -1,79 +1,93 @@
+code-body: yes
 list-before: $:/core/ui/EditTemplate/body
-tags: 
 title: $:/plugins/kookma/gatha/ui/edit-template-plugin-meta-data
 type: text/vnd.tiddlywiki
 
-\define plugin-info-row(name, value, output:"html")
-\rules except wikilink
-  <tr class="ga-plugin-info-element">
-    <td class="ga-plugin-info-element-name">
-      $name$:
-    </td>
-    <td class="ga-plugin-edit-element-value">
-	  $value$
-    </td>
-  </tr>
+\procedure plugin-info-row(display-name, field-value)
+<tr class="ga-plugin-info-element">
+	<td class="ga-plugin-info-element-name">
+		<$text text=<<display-name>> />:
+	</td>
+	<td class="ga-plugin-edit-element-value">
+		<$transclude $variable="field-value" $mode=inline>
+			<span class='ga-plugin-info-unspecified'>unspecified</span>
+		</$transclude>
+	</td>
+</tr>
 \end
 
-\define plugin-edit-row(name, field, placeholder)
-  <tr class="ga-plugin-info-element">
-    <td class="ga-plugin-info-element-name">
-      $name$:
-    </td>
-    <td class="ga-plugin-edit-element-value">
-      <$edit-text field="$field$" placeholder="$placeholder$"/>
-    </td>
-  </tr>
+\procedure plugin-edit-row(display-name, field, placeholder)
+<tr class="ga-plugin-info-element">
+	<td class="ga-plugin-info-element-name">
+		<$text text=<<display-name>> />:
+	</td>
+	<td class="ga-plugin-edit-element-value">
+		<$edit-text field=<<field>> placeholder=<<placeholder>> />
+	</td>
+</tr>	
 \end
+
 
 <!-- select plugin-type and update the draft title
 The update-draft-title-action used by select widget to update title of draft plugin
 -->
-\define update-draft-title-action() 
-<$vars old-draft-title={{{ [all[current]get[draft.title]split[/]butfirst[2]] +[join[/]] }}} >
-<$action-setfield $field="draft.title" $value={{{ [{!!plugin-draft}addprefix[$:/]addsuffix[s/]addsuffix<old-draft-title>]  }}} />
-</$vars>
+\procedure update-draft-title-action() 
+<$let old-draft-title={{{ [all[current]get[draft.title]split[/]butfirst[2]] +[join[/]] }}} >
+	<$action-setfield $field="draft.title" $value={{{ [{!!plugin-draft}addprefix[$:/]addsuffix[s/]addsuffix<old-draft-title>]  }}} />
+</$let>
 \end
 
-\define plugin-edit-row-plugintype(name, field, placeholder)
+\procedure plugin-edit-row-plugintype(display-name, field, placeholder)
 <tr class="ga-plugin-info-element">
-  <td class="ga-plugin-info-element-name">
-    $name$:
-  </td>
-  <td class="ga-plugin-edit-element-value">
-	<$edit-text field="$field$" placeholder="$placeholder$" class="ga-plugin-edit-element-type"/>&nbsp; <$select field="$field$" default="plugin" actions=<<update-draft-title-action>> >
-            <$list filter="[all[tiddlers+shadows]tag[$:/tags/Gatha/PluginType]] :filter[has[caption]get[caption]!match[Undefined]]">
-                <option value={{{ [{!!caption}lowercase[]] }}} ><$text text={{!!caption}}/></option>
-            </$list>
-        </$select>
-    </td>
+	<td class="ga-plugin-info-element-name">
+		<$text text=<<display-name>> />:
+	</td>
+	<td class="ga-plugin-edit-element-value">
+		<$edit-text field=<<field>> placeholder=<<placeholder>> class="ga-plugin-edit-element-type"/>&nbsp; <$select field=<<field>> default="plugin" actions=<<update-draft-title-action>> >
+			<$list filter="[all[tiddlers+shadows]tag[$:/tags/Gatha/PluginType]] :filter[has[caption]get[caption]!match[Undefined]]">
+				<option value={{{ [{!!caption}lowercase[]] }}} ><$text text={{!!caption}}/></option>
+			</$list>
+		</$select>
+	</td>
 </tr>       
-\end        
+\end
+
+\procedure plugin-edit-row-stability(display-name, field, placeholder)
+<tr class="ga-plugin-info-element">
+	<td class="ga-plugin-info-element-name">
+		<$text text=<<display-name>> />:
+	</td>
+	<td class="ga-plugin-edit-element-value">
+		<$edit-text field=<<field>> placeholder=<<placeholder>> class="ga-plugin-edit-element-type"/>&nbsp; <$select field=<<field>> default="STABILITY_1_EXPERIMENTAL"> 		
+				<option value="STABILITY_0_DEPRECATED" >Deprecated</option>
+				<option value="STABILITY_1_EXPERIMENTAL" >Experimental</option>
+				<option value="STABILITY_2_STABLE" >Stable</option>
+				<option value="STABILITY_3_LEGACY" >Legacy</option>				
+		</$select>
+	</td>
+</tr>       
+\end   
 
 
 <!-- create the table -->
 <$list filter="[all[current]has:field[plugin-draft]]">
 
 <div class="ga-plugin-info">
-  <table class="ga-plugin-info">
-    <$set name="publisher" filter="[all[current]get[draft.title]split[/]nth[3]]">
-      <<plugin-info-row name:"Plugin publisher" value:"$(publisher)$" output:"text">>
-      <$set name="plugin-name" filter="[all[current]get[draft.title]split[/]nth[4]]">
-        <<plugin-info-row name:"Plugin name" value:"$(plugin-name)$" output:"text">>
-      </$set>
-    </$set>
-
-	<<plugin-edit-row "Version" "version" "0.0.1">>
-	<<plugin-edit-row-plugintype "Plugin type" "plugin-draft" "plugin">>
-	<<plugin-edit-row "Display name" "name" "The name displayed in plugins page">>
-	<<plugin-edit-row "Description" "description" "Tell TiddlyWiki users about what your plugin does">>
-	<<plugin-edit-row "Author" "author" "U. K. Known">>
-	<<plugin-edit-row "Source" "source" "https://example.org/foo">>
-	<<plugin-edit-row "Plugin parent"   "parent-plugin" "e.g. $:/plugins/kookma/utility">>	
-	<<plugin-edit-row "Plugin priority" "plugin-priority" "">>
-	<<plugin-edit-row "Plugin dependencies" "dependents" "Plugins required by this one e.g. $:/plugins/kookma/shiraz">>	
-	<<plugin-edit-row "Required TW Core version" "core-version" ">=5.1.23">>
-</table>
+	<table class="ga-plugin-info">
+    <$transclude $variable="plugin-info-row" display-name="Plugin publisher" field-value={{{ [all[current]get[draft.title]split[/]nth[3]] }}} />
+		<$transclude $variable="plugin-info-row" display-name="Plugin name"      field-value={{{ [all[current]get[draft.title]split[/]nth[4]] }}} />
+		<<plugin-edit-row-plugintype "Plugin type" "plugin-draft" "plugin">>		
+		<<plugin-edit-row "Version" "version" "0.0.1">>
+		<<plugin-edit-row-stability "Plugin stability" "stability" "STABILITY_1_EXPERIMENTAL">>
+		<<plugin-edit-row "Display name" "name" "The name displayed in plugins page">>
+		<<plugin-edit-row "Description" "description" "Tell TiddlyWiki users about what your plugin does">>
+		<<plugin-edit-row "Author" "author" "U. K. Known">>
+		<<plugin-edit-row "Source" "source" "https://example.org/foo">>
+		<<plugin-edit-row "Plugin priority" "plugin-priority" "Numerical priority (higher numbers install later, the core plugin has a priority of zero">>		
+		<<plugin-edit-row "Plugin parent"   "parent-plugin" "Title of the plugin under which this plugin should be displayed as a sub-plugin in the control panel plugin e.g. $:/plugins/kookma/utility">>	
+		<<plugin-edit-row "Plugin dependencies" "dependents" "Plugins that should be installed in order for this one to work e.g. $:/plugins/kookma/shiraz">>	
+		<<plugin-edit-row "Required TW Core version" "core-version" ">=5.1.23">>
+	</table>
 </div>
 
 </$list>

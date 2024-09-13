@@ -1,0 +1,4 @@
+title: $:/plugins/kookma/gatha/procedures/definition
+type: text/vnd.tiddlywiki
+
+\procedure tidConfig() $:/config/gatha/UIElements

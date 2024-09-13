@@ -1,76 +1,42 @@
+code-body: yes
 list-before: $:/core/ui/ViewTemplate/plugin
 tags: 
 title: $:/plugins/kookma/gatha/ui/view-template-plugin-meta-data
 type: text/vnd.tiddlywiki
 
-\define plugin-type-infotiddler(tiddler)
-  <$transclude tiddler="$tiddler$">
-    <$transclude tiddler="$:/plugins/kookma/gatha/plugin-types/undefined"/>
-  </$transclude>
+\procedure plugin-info-row(display-name, field-value)
+<tr class="ga-plugin-info-element">
+	<td class="ga-plugin-info-element-name">
+		<$text text=<<display-name>> />:
+	</td>
+	<td class="ga-plugin-info-element-value">
+		<$transclude $variable="field-value" $mode=inline>
+			<span class='ga-plugin-info-unspecified'>unspecified</span>
+		</$transclude>
+	</td>
+</tr>
 \end
 
-\define plugin-type-info(type)
-  <$macrocall $name="plugin-type-infotiddler" tiddler="$:/plugins/kookma/gatha/plugin-types/$type$"/>
-\end
 
-\define plugin-info-row(name, value)
-\rules except wikilink
+\procedure update-plugin-info(display-name)
   <tr class="ga-plugin-info-element">
     <td class="ga-plugin-info-element-name">
-      $name$:
-    </td>
-    <td class="ga-plugin-info-element-value">
-      $value$
-    </td>
-  </tr>
-\end
-
-\define plugin-info-field-unspecified()
-  <span class='ga-plugin-info-unspecified'>unspecified</span>
-\end
-
-\define plugin-info-field(name, field)
-  <<plugin-info-row "$name$" "<$view field='$field$' format='text'><$macrocall $name='plugin-info-field-unspecified' /></$view>">>
-\end
-
-\define plugin-info-field-plugin-type-int(name, type)
-  <$set name="desc" value=<<plugin-type-info "$type$" >> >
-    <$macrocall $name="plugin-info-row" name="$name$" value=<<desc>> />
-  </$set>
-\end
-
-\define plugin-info-field-plugin-type(name)
-  <$macrocall $name="plugin-info-field-plugin-type-int" name="$name$" type={{!!plugin-draft}} />
-\end
-
-\define plugin-info-field-link(name, field)
-  <$list filter="[all[current]!field:$field$[]]" emptyMessage="""<<plugin-info-row "$name$" "<$macrocall $name='plugin-info-field-unspecified'/>" >>""">
-    <$macrocall $name="plugin-info-row" name="$name$" value={{!!$field$}} />
-  </$list>
-\end
-
-\define plugin-info-filter(name, filter)
-  <$list filter="$filter$" emptyMessage="""<<plugin-info-row "$name$" "<$macrocall $name='plugin-info-field-unspecified'/>" >>""">
-    <$macrocall $name="plugin-info-row" name="$name$" value={{!!title}} />
-  </$list>
-\end
-
-\define update-plugin-info(name)
-  <tr class="ga-plugin-info-element">
-    <td class="ga-plugin-info-element-name">
-      $name$:
+      <$text text=<<display-name>> />:
     </td>
     <td class="ga-plugin-info-element-value"><!-----changed----->
       <$importvariables filter="[[$:/plugins/kookma/gatha/actions/add-plugin.info]]">
-        <$vars plugin-title=<<currentTiddler>> currentTiddler={{{ [<currentTiddler>addsuffix[/plugin.info]] }}}  >
+        <$let plugin-full-path=<<currentTiddler>>  >
           <$button class="tc-btn-invisible tc-tiddlylink" tooltip="create and update plugin.info"> update
-            <<addInfo-actions>>
-          </$button>		
-        </$vars>			 
+							<$tiddler tiddler={{{ [<plugin-full-path>] [[plugin.info]] :and[join[/]] }}} >
+							<<addInfo-actions>>
+							<$action-navigate $to=<<currentTiddler>>/><!-- open the plugin.info file -->
+							</$tiddler>
+          </$button>
+        </$let>			 
       </$importvariables>      
     </td>
   </tr>
-\end
+\end update-plugin-info
 
 
 <$list filter="[all[current]has:field[plugin-draft]]">
@@ -78,20 +44,24 @@ type: text/vnd.tiddlywiki
 {{||$:/core/ui/Components/plugin-info}}
 
 <div class="ga-plugin-info">
-  <table class="ga-plugin-info">
-    <<plugin-info-filter "Plugin publisher" "[all[current]split[/]nth[3]]">>
-    <<plugin-info-filter "Plugin name" "[all[current]split[/]nth[4]]">>
-    <<plugin-info-field "Version" "version">>
-    <$macrocall $name="plugin-info-field-plugin-type" name="Plugin type" />
-    <<plugin-info-field "Display name" "name">>
-    <<plugin-info-field "Description" "description">>
-    <<plugin-info-field "Information tabs" "list">>		
-    <<plugin-info-field "Author" "author">>
-    <$macrocall $name="plugin-info-field-link" name="Source" field="source" />
-    <<plugin-info-field "Plugin parent" "parent-plugin">>			
-    <<plugin-info-field "Plugin priority" "plugin-priority">>
-		<<plugin-info-field "Plugin dependencies" "dependents">>	
-    <<plugin-info-field "Required TW Core version" "core-version">>
+  <table class="ga-plugin-info">		
+		<$transclude $variable="plugin-info-row" display-name="Plugin publisher" field-value={{{ [all[current]split[/]nth[3]] }}}/>	
+		<$transclude $variable="plugin-info-row" display-name="Plugin name" field-value={{{ [all[current]split[/]nth[4]] }}}/>
+		<$let plugin-type={{!!plugin-draft}}
+			plugin-desc={{{ [[$:/plugins/kookma/gatha/plugin-types/]addsuffix<plugin-type>] :map[get[text]] }}} >
+			<$transclude $variable="plugin-info-row" display-name="Plugin type" field-value=<<plugin-desc>>   />
+		</$let>	
+		<$transclude $variable="plugin-info-row" display-name="Version" field-value={{!!version}}/>
+		<$transclude $variable="plugin-info-row" display-name="Plugin stability" field-value={{!!stability}}/>			
+		<$transclude $variable="plugin-info-row" display-name="Display name" field-value={{!!name}}/>
+		<$transclude $variable="plugin-info-row" display-name="Description" field-value={{!!description}}/>
+		<$transclude $variable="plugin-info-row" display-name="Author" field-value={{!!author}}/>	
+		<$transclude $variable="plugin-info-row" display-name="Source" field-value={{!!source}}/>			
+		<$transclude $variable="plugin-info-row" display-name="Information tabs" field-value={{!!list}}/>
+		<$transclude $variable="plugin-info-row" display-name="Plugin priority" field-value={{!!plugin-priority}}/>			
+		<$transclude $variable="plugin-info-row" display-name="Plugin parent" field-value={{!!parent-plugin}}/>	
+		<$transclude $variable="plugin-info-row" display-name="Plugin dependencies" field-value={{!!dependents}}/>	
+		<$transclude $variable="plugin-info-row" display-name="Required TW Core version" field-value={{!!core-version}}/>	
     <<update-plugin-info "Plugin.info">>
   </table>
 </div>

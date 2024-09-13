@@ -1,9 +1,8 @@
-tags: 
 title: $:/plugins/kookma/gatha/readme
 type: text/vnd.tiddlywiki
 
 ; Gatha Studio Workspace
-Create Tiddlywiki plugins, themes, languages, editions, contents in browser in an easy way and distribute as packaged JSON file, Node.JS plugin folder, or a Tiddlywiki app.
+Create Tiddlywiki plugins, themes, languages, editions, contents in browser in an easy way and distribute as packaged JSON file, Node.js plugin folder, or a Tiddlywiki app.
 
 ;Code and demo
 For learning plugin features, syntax, tutorial and examples see the plugin demo and code pages

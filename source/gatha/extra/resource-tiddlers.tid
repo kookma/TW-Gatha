@@ -1,78 +1,29 @@
-tags: 
+code-body: yes
+created: 20240913071223308
+modified: 20240913071223308
 title: $:/plugins/kookma/gatha/extra/resource-tiddlers
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-\import $:/plugins/kookma/gatha/macros/definition
 
-\define clear-all()
-<$list filter="[list[!!resource-tiddlers]count[]!match[0]]" variable="null" emptyMessage="&nbsp;drop tiddlers here">
-<$button class="tc-btn-invisible tc-btn-mini" tooltip="remove all extra tiddlers" >remove all
-<$action-confirm $message="Do you wish to remove all resource tiddlers?">
-<$action-setfield $tiddler=<<gv-extra-list>> $field="resource-tiddlers" $value=""/>
-</$action-confirm>
-</$button>
-</$list>
-\end
-
-\define remove-tiddler-from-list()
-<$button 
-   tooltip="remove tiddler" aria-label="remove tiddler" 
-   class="tc-btn-invisible tc-btn-mini tc-small-gap-right"
-   actions="""<$action-listops $tiddler=<<gv-extra-list>> $field="resource-tiddlers" $subfilter="-[<currentTiddler>]"/>""" >
-   {{$:/core/images/close-button}}
-</$button>
-<$link to={{!!title}}><$view field="title"/></$link>
-\end
-
-
-\define drop-actions()
-<$list filter="[<actionTiddler>!prefix<gv-extra-list>] :filter[has[title]]" variable=null><!-- don ot allow to drop tiddlers from the same plugin -->
-<$action-listops $tiddler=<<gv-extra-list>> $field="resource-tiddlers" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
-</$list>
-\end
-
-\define placeholder()
-<div class="tc-droppable-placeholder"/>
-\end
-
-\define droppable-item(button)
-\whitespace trim
-<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>
-<<placeholder>>
-<div>
-$button$
-</div>
-</$droppable>
-\end
-
-\define add-bulk-tiddler()
-<$button to=<<tid-addExtraTiddlers-ui>> class="tc-btn-invisible ga-extra-button" tooltip="add bulk of tiddlers"> {{$:/core/images/clone-button}}
-<$action-setfield $tiddler=<<tid-addExtraTiddlers-ui>> $field="target-plugin" $value=<<currentTiddler>> />
-</$button>
-\end
-
-<$list filter="[<tidConfig>getindex[res-tiddlers]match[show]]" variable=null>
-<!--(1) show header with number of extra tiddlers and optional button for add bulk tiddlers-->
+<%if [<tidConfig>getindex[add-resource-tiddlers]match[show]] %>
+<!--(1) show header with number of resource tiddlers and optional button for add bulk tiddlers-->
 <div class="ga-extra-label" style="margin-top:10px;" title="drop note, doc, bookmark, and example tiddlers here">
 <b>Resource tiddlers</b>&nbsp; (<$count filter="[enlist{!!resource-tiddlers}]" />)
 </div>
 
 <!--(2) draggable list of extra tiddlers -->
 <div class="tc-sidebar-tab-open" style="margin-left:14px;">
-<$vars gv-extra-list=<<currentTiddler>> >
-	
-<$list filter="[list[!!resource-tiddlers]]" storyview="pop">
-<div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button=<<remove-tiddler-from-list>> />
-</div>
-</$list>
-<div><$macrocall $name="droppable-item" button=<<clear-all>> /></div>
-</$vars>
-</div> 
-</$list>
+	<$let gv-target-plugin=<<currentTiddler>> target-field="resource-tiddlers">
 
-<!-- NOTE
-This tiddler is a clone of [[$:/plugins/kookma/gatha/extra/extra-tiddlers]] but does not use the add bulk tiddlers button and also uses resource-tiddlers instead of
-extra-tiddlers field
--->
+		<$list filter="[list[!!resource-tiddlers]]" storyview="pop">
+			<div class="tc-sidebar-tab-open-item">
+				<$macrocall $name="droppable-item" button=<<remove-tiddler-from-list>> />
+			</div>
+		</$list>
+		<div>
+			<$transclude $variable="droppable-item" button=<<remove-all>> />
+		</div>
+	</$let>
+</div> 
+<%endif%>

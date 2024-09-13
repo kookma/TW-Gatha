@@ -1,12 +1,14 @@
 caption: export json file
+code-body: yes
 tags: $:/tags/Gatha/ExportButton
 title: $:/plugins/kookma/gatha/export/export-btn-plugin-packaged
 type: text/vnd.tiddlywiki
 
 \define plugin-exported-json-filename() $(pluginType)$_$(publisherName)$_$(pluginName)$_v$(pluginVersion)$_$(timedate)$.json
 
-\define export-packaged-plugin()
-<$button class="tc-btn-invisible" tooltip="export plugin as a packed json file">
+\procedure export-packaged-plugin()
+\function isdisabled() [<plugin-full-path>get[release]!match[yes]then[yes]]
+<$button class="tc-btn-invisible" tooltip="export plugin as a packed json file" disabled=<<isdisabled>>>
 {{$:/core/images/list}}<span class="tc-btn-text">packaged plugin (json file)</span>
 <$action-sendmessage $message="tm-download-file" 
     $param="$:/plugins/kookma/gatha/export/json-template" 
@@ -15,6 +17,6 @@ type: text/vnd.tiddlywiki
     filename=<<plugin-exported-json-filename>>
 />
 </$button>
-\end
+\end export-packaged-plugin
 
 <<export-packaged-plugin>>

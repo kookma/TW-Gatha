@@ -1,0 +1,13 @@
+caption: Default template
+code-body: yes
+tags: $:/tags/Gatha/Templates/PublishTiddler $:/tags/Commander/Working
+title: $:/plugins/kookma/gatha-thirdflow/templates/tid-tiddler
+type: text/vnd.tiddlywiki
+
+<!--
+
+This template is used for saving tiddlers in TiddlyWeb *.tid format
+
+--><$fields exclude='text bag' template='$name$: $value$
+'></$fields>`
+`<$view field="text" format="text" />

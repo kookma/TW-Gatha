@@ -1,0 +1,4 @@
+module-type: command
+tags: $:/tags/Commander/Working
+title: $:/plugins/kookma/gatha-thirdflow/commands/releasedemowiki.js
+type: application/javascript

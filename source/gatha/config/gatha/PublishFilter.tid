@@ -1,6 +1,0 @@
-tags: 
-title: $:/config/gatha/PublishFilter
-type: text/vnd.tiddlywiki
-
-[[$:/DefaultTiddlers]]
-[subfilter{$:/DefaultTiddlers}]

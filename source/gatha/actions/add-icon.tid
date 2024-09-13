@@ -3,13 +3,13 @@ tags: $:/tags/Gatha/Action
 title: $:/plugins/kookma/gatha/actions/add-icon
 type: text/vnd.tiddlywiki
 
-\import $:/plugins/kookma/gatha/macros/create-item
-
 <!-- create the icon tiddler, if exist navigate to it -->
-<$vars iconTemplate="$:/plugins/kookma/gatha/templates/icon" iconTiddlerTitle={{{ [<plugin-full-path>addsuffix[/icon]] }}}>
+<$let iconTemplate="$:/plugins/kookma/gatha/templates/icon" iconTiddlerTitle={{{ [<plugin-full-path>addsuffix[/icon]] }}}>
 <$button class="tc-btn-invisible"> {{!!caption}}
-<$list filter="[<iconTiddlerTitle>is[missing]]" emptyMessage='<$action-navigate $to=<<iconTiddlerTitle>>/>' variable=ignore>
-<$action-sendmessage $message="tm-new-tiddler" $param=<<iconTemplate>> title=<<iconTiddlerTitle>> />
-</$list>
+	<%if [<iconTiddlerTitle>is[missing]] %>
+		<$action-sendmessage $message="tm-new-tiddler" $param=<<iconTemplate>> title=<<iconTiddlerTitle>> />
+	<%else%>
+		<$action-navigate $to=<<iconTiddlerTitle>>/>
+	<%endif%>
 </$button>
-</$vars>
+</$let>

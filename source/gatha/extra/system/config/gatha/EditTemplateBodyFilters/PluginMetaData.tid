@@ -1,0 +1,8 @@
+created: 20240913071916729
+list-before: $:/config/EditTemplateBodyFilters/canonical-uri
+modified: 20240913071916730
+tags: $:/tags/EditTemplateBodyFilter
+title: $:/config/gatha/EditTemplateBodyFilters/PluginMetaData
+type: text/vnd.tiddlywiki
+
+[has:field[plugin-draft]then[$:/plugins/kookma/gatha/ui/edit-template-plugin-meta-data]]
