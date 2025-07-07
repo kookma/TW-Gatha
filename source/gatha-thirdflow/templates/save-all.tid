@@ -1,6 +1,6 @@
 caption: Save all
 code-body: yes
-tags: $:/tags/Gatha/Templates/PublishDemo $:/tags/Commander/Working
+tags: $:/tags/Gatha/Templates/PublishDemo
 title: $:/plugins/kookma/gatha-thirdflow/templates/save-all
 type: text/vnd.tiddlywiki
 

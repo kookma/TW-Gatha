@@ -1,22 +1,20 @@
 code-body: yes
-created: 20240913071219525
-modified: 20240913071219525
 title: $:/plugins/kookma/gatha/extra/extra-tiddlers
 type: text/vnd.tiddlywiki
 
 \whitespace trim
 
 <%if [<tidConfig>getindex[add-extra-tiddlers]match[show]] %>
-
+<details open>
 <!--(1) show header with number of extra tiddlers and optional button for add bulk tiddlers-->
+<summary class="kk-gatha-accordion">
 <div class="ga-extra-label" title="drop extra tiddlers here">
 <<add-bulk-tiddler>> &nbsp;<b>Extra tiddlers</b>&nbsp; (<$count filter="[enlist{!!extra-tiddlers}]" />)
 </div>
-
+</summary>
 <!--(2) draggable list of extra tiddlers -->
 <div class="tc-sidebar-tab-open" style="margin-left:14px;">
 	<$let gv-target-plugin=<<currentTiddler>> target-field="extra-tiddlers">
-
 		<$list filter="[list[!!extra-tiddlers]]" storyview="pop">
 			<div class="tc-sidebar-tab-open-item">
 				<$macrocall $name="droppable-item" button=<<remove-tiddler-from-list>> />
@@ -26,6 +24,6 @@ type: text/vnd.tiddlywiki
 			<$transclude $variable="droppable-item" button=<<remove-all>>/>
 		</div>
 	</$let>
-</div> 
-
+</div>
+</details>
 <%endif%>

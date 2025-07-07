@@ -1,7 +1,5 @@
-created: 20240913071912683
-modified: 20240913071912683
 tags: 
-target-plugin: $:/plugins/kookma/baguette
+target-plugin: $:/plugins/kookma/gatha
 title: Gatha Add Bulk of Extra Tiddlers
 type: text/vnd.tiddlywiki
 

@@ -1,17 +1,17 @@
 code-body: yes
-created: 20240913071223308
-modified: 20240913071223308
 title: $:/plugins/kookma/gatha/extra/resource-tiddlers
 type: text/vnd.tiddlywiki
 
 \whitespace trim
 
 <%if [<tidConfig>getindex[add-resource-tiddlers]match[show]] %>
+<details open>
 <!--(1) show header with number of resource tiddlers and optional button for add bulk tiddlers-->
+<summary class="kk-gatha-accordion">
 <div class="ga-extra-label" style="margin-top:10px;" title="drop note, doc, bookmark, and example tiddlers here">
 <b>Resource tiddlers</b>&nbsp; (<$count filter="[enlist{!!resource-tiddlers}]" />)
 </div>
-
+</summary>
 <!--(2) draggable list of extra tiddlers -->
 <div class="tc-sidebar-tab-open" style="margin-left:14px;">
 	<$let gv-target-plugin=<<currentTiddler>> target-field="resource-tiddlers">
@@ -26,4 +26,5 @@ type: text/vnd.tiddlywiki
 		</div>
 	</$let>
 </div> 
+</details>
 <%endif%>
