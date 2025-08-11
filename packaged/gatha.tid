@@ -3,7 +3,7 @@ core-version: >=5.3.5
 description: Creating and distributing plugins, editions, contents in browser
 list: readme license history
 name: Gatha Studio Workspace
-packaged-by: Gatha on 7th July 2025, 22:02:31
+packaged-by: Gatha on 11th August 2025, 12:16:14
 plugin-type: plugin
 source: https://github.com/kookma/TW-Gatha
 stability: STABILITY_2_STABLE
